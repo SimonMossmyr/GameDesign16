@@ -5,6 +5,8 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public float speed = 1f;
 	private Rigidbody2D rb2d;
+
+	// Hold whether direction key is pressed
 	private bool up = false, down = false, left = false, right = false;
 
 	// Use this for initialization
@@ -16,15 +18,21 @@ public class PlayerBehaviour : MonoBehaviour {
 	void Update () {
 		updateMovement ();
 
+		/*
+		 * Calculate directional movement.
+		 * Movement per frame is is (1|-1) * delta * speed.
+		 */
 		float movementX = (right && !left? 1 : (left && !right? -1 : 0)) * Time.deltaTime * speed;
 		float movementY = (up && !down? 1 : (down && !up? -1 : 0)) * Time.deltaTime * speed;
 
 		Vector2 movement = new Vector2 (movementX, movementY);
 
-		// rb2d.AddForce (movement * speed);
 		rb2d.MovePosition (rb2d.position + (movement * speed));
     }
 
+	/*
+	 * Update bools holding key-down information
+	 */
 	void updateMovement () {
 		if (Input.GetKeyDown (KeyCode.W) && !up)
 			up = true;
