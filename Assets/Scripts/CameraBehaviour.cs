@@ -16,12 +16,12 @@ public class CameraBehaviour : MonoBehaviour {
 	void Update () {
 		Vector3 vPos = c.WorldToViewportPoint (player.transform.position);
 
-		Vector2 newPos = new Vector2();
+		Vector3 newPos = vPos;
 
-		if (vPos.x < 0.2f) {
-			newPos.x -= 0.2f - vPos.x;
-		} else if (vPos.x > 0.8f) {
-			newPos.x += vPos.x - 0.8f;
+		if (vPos.x < 0.1f) {
+			newPos.x -= 0.1f - vPos.x;
+		} else if (vPos.x > 0.9f) {
+			newPos.x += vPos.x - 0.9f;
 		}
 
 		if (vPos.y < 0.2f) {
@@ -30,6 +30,6 @@ public class CameraBehaviour : MonoBehaviour {
 			newPos.y += vPos.y - 0.8f;
 		}
 
-		gameObject.transform.Translate (newPos);
+		gameObject.transform.Translate (c.ViewportToWorldPoint(newPos) - player.transform.position);
 	}
 }
