@@ -6,9 +6,6 @@ public class PlayerBehaviour : MonoBehaviour {
     public float speed;
 	private Rigidbody2D rb2d;
 
-	// Hold whether direction key is pressed
-	private bool up = false, down = false, left = false, right = false;
-
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
