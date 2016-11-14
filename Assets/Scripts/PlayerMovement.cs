@@ -5,10 +5,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public float speed;
 	private Rigidbody2D rb2d;
+	private int playerNumber;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		playerNumber = gameObject.GetComponent<PlayerStats> ().PlayerNumber;
 	}
 	
 	// Update is called once per frame
@@ -16,8 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 		/*
 		 * Calculate directional movement.
 		 */
-		float movementX = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-		float movementY = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+		float movementX = Input.GetAxis("Horizontal-P"+playerNumber) * Time.deltaTime * speed;
+		float movementY = Input.GetAxis("Vertical-P"+playerNumber) * Time.deltaTime * speed;
 
 		/*
 		 * Execute movement
