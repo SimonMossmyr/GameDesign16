@@ -3,8 +3,6 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	[Range(0,1)]
-	public int playerNumber;
     public float speed;
 	private Rigidbody2D rb2d;
 
