@@ -6,6 +6,7 @@ public class PlayerStats : MonoBehaviour {
 
 	[Range(0,1)]
 	public int PlayerNumber;
+	public float HealthPoints
 
 	// Use this for initialization
 	void Start () {
