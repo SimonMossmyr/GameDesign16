@@ -17,4 +17,8 @@ public class PlayerStats : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public void AddHealth(float delta) {
+		HealthPoints += delta;
+	}
 }
