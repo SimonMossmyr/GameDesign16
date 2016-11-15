@@ -3,39 +3,82 @@ using System.Collections;
 
 public class CameraBehaviour : MonoBehaviour {
 
-	private GameObject player;
+	public GameObject[] players;
 	private Camera c;
+    private float defaultSize = 5f;
+    public float minSize = 2f;
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find ("PlayerCharacter");
 		c = GetComponent<Camera> ();
+        defaultSize = c.orthographicSize;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		// Current local player position
-		Vector3 vPos = c.WorldToViewportPoint (player.transform.position);
 
-		Vector3 newPos = vPos;
+    // Update is called once per frame
+    void Update()
+    {
+        // Current local player position
+        Vector2 minPos = new Vector2(9999, 9999);
+        Vector2 maxPos = new Vector2(-9999, -9999);
+        Vector3 avgPlayerPos = new Vector3();
+        foreach (GameObject player in players)
+        {
+            Vector3 playerPos = player.transform.position;
+            avgPlayerPos += playerPos;
 
-		// Calculate new local position
-		if (vPos.x < 0.1f) {
-			newPos.x -= 0.1f - vPos.x;
-		} else if (vPos.x > 0.9f) {
-			newPos.x += vPos.x - 0.9f;
-		}
+            if (playerPos.x > maxPos.x)
+            {
+                maxPos.x = playerPos.x;
+            }
+            if (playerPos.y > maxPos.y)
+            {
+                maxPos.y = playerPos.y;
+            }
+            if (playerPos.x < minPos.x)
+            {
+                minPos.x = playerPos.x;
+            }
+            if (playerPos.y < minPos.y)
+            {
+                minPos.y = playerPos.y;
+            }
+        }
+        avgPlayerPos = avgPlayerPos / players.Length;
 
-		if (vPos.y < 0.2f) {
-			newPos.y -= 0.2f - vPos.y;
-		} else if (vPos.y > 0.8f) {
-			newPos.y += vPos.y - 0.8f;
-		}
+        // Zoom camera through orthographic size for 2D
+        float newOrthographicSize = Mathf.Sqrt((maxPos - minPos).sqrMagnitude) / 1.8f;
+        if (newOrthographicSize > defaultSize)
+        {
+            newOrthographicSize = defaultSize;
+        }
+        else if (newOrthographicSize < minSize)
+        {
+            newOrthographicSize = minSize;
+        }
+        c.orthographicSize = newOrthographicSize;
 
-		/*
-		 * newPos now holds new local position to align viewport.
-		 * Use the vector between new and old player position to move camera.
-		 */
-		gameObject.transform.Translate (c.ViewportToWorldPoint(newPos) - player.transform.position);
-	}
+        // Limit camera to within playfield 
+        float xlimit = c.aspect;
+        float ylimit = 1f;
+        float cameraScale = (defaultSize - c.orthographicSize);
+        if (avgPlayerPos.x > cameraScale * xlimit)
+        {
+            avgPlayerPos.x = cameraScale * xlimit;
+        }
+        else if (avgPlayerPos.x < -cameraScale * xlimit)
+        {
+            avgPlayerPos.x = -cameraScale * xlimit;
+        }
+        if (avgPlayerPos.y > cameraScale * ylimit)
+        {
+            avgPlayerPos.y = cameraScale * ylimit;
+        }
+        else if (avgPlayerPos.y < -cameraScale * ylimit)
+        {
+            avgPlayerPos.y = -cameraScale * ylimit;
+        }
+
+        // Move camera to average player pos
+        transform.position = new Vector3(avgPlayerPos.x, avgPlayerPos.y, -10);
+    }
 }
