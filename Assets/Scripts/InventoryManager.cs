@@ -14,9 +14,6 @@ public class InventoryManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        //Debug.Log(itemsInInventory.Count);
-
 	}
 
     //return the inventory list if needed

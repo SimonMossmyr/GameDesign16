@@ -7,9 +7,7 @@ using UnityEngine.UI;
     Class for handling the canvas drawing. 
 
     There are two canvas in the scene. 1 for each player. Reason for this is beacuse I was not able to figure out how to use one canvas and 
-    populate with different values for different players. 
-    
-    This needs to be fixed.
+    populate with different values for different players. This needs to be fixed.
 */
 public class InventoryWindow : MonoBehaviour {
 
@@ -125,6 +123,8 @@ public class InventoryWindow : MonoBehaviour {
         if (other.gameObject.tag == "Player1Corner" || other.gameObject.tag == "Player2Corner")
         {
             CanvasObject.enabled = false;
+
+            mat1 = mat2 = mat3 = 0;
         }
     }
 
@@ -202,6 +202,9 @@ public class InventoryWindow : MonoBehaviour {
                 slot1.sprite = emptySlotSprite;
                 slot2.sprite = emptySlotSprite;
                 slot3.sprite = emptySlotSprite;
+
+                BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
+                playerBombWindow.fillBombs();
             }
         }
 	}
