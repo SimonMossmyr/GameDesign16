@@ -27,4 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 movement = new Vector2 (movementX, movementY);
 		rb2d.MovePosition (rb2d.position + movement);
     }
+
+	public void AddSpeed(float amount) {
+		speed += amount;
+	}
 }
