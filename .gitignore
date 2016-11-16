@@ -30,4 +30,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-Assets/Scenes/*
+/Assets/Scenes/*
