@@ -28,7 +28,7 @@ public class Material : MonoBehaviour {
 	void Update () {
 
 	}
-
+    //getters for health and damage
     public int getDamage()
     {
         return damage;
@@ -39,6 +39,7 @@ public class Material : MonoBehaviour {
         return health;
     }
 
+    //what type of material is that 
     public MaterialType getMaterialType()
     {
         return type;

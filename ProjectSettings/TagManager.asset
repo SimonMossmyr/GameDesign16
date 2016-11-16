@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Material
   - Player1Corner
-  - InventoryCanvas
+  - Player2Corner
+  - Player1Inventory
+  - Player2Inventory
   layers:
   - Default
   - TransparentFX

@@ -53,7 +53,7 @@ GameObject:
   - 61: {fileID: 61000013250773398}
   - 114: {fileID: 114000011667228290}
   m_Layer: 0
-  m_Name: FireMaterial
+  m_Name: Material3
   m_TagString: Material
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
