@@ -55,7 +55,7 @@ GameObject:
   - 4: {fileID: 4000011356782260}
   - 198: {fileID: 198000012831875596}
   - 199: {fileID: 199000013953438510}
-  - 114: {fileID: 114000010662377062}
+  - 114: {fileID: 114000013578970752}
   m_Layer: 0
   m_Name: ExplosionDamage
   m_TagString: Untagged
@@ -166,7 +166,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011356782260}
   m_RootOrder: 1
---- !u!114 &114000010662377062
+--- !u!114 &114000013578970752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

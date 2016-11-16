@@ -41,6 +41,14 @@ public class BombWindow : MonoBehaviour {
     [SerializeField]
     Image slot3;
 
+    [SerializeField]
+    GameObject bombDamage;
+    [SerializeField]
+    GameObject bombHeal;
+    [SerializeField]
+    GameObject bombSlow;
+
+
     // Use this for initialization
     void Start () {
 	
@@ -91,6 +99,10 @@ public class BombWindow : MonoBehaviour {
                 //drop the bomb
                 slot1.sprite = emptySlotSprite;
                 isFirstSlotFilled = false;
+
+                Instantiate(bombDamage, player.transform.position, Quaternion.identity);
+
+
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[2]")
@@ -100,6 +112,8 @@ public class BombWindow : MonoBehaviour {
             {
                 //drop the bomb
                 slot2.sprite = emptySlotSprite;
+                isSecondSlotFilled = false;
+                Instantiate(bombHeal, pos, Quaternion.identity);
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[3]")
@@ -110,6 +124,7 @@ public class BombWindow : MonoBehaviour {
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
+                Instantiate(bombSlow, pos, Quaternion.identity);
             }
         }
     }

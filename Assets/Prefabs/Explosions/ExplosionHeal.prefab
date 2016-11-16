@@ -55,7 +55,7 @@ GameObject:
   - 4: {fileID: 4000011356782260}
   - 198: {fileID: 198000012831875596}
   - 199: {fileID: 199000013953438510}
-  - 114: {fileID: 114000011684709256}
+  - 114: {fileID: 114000010895306540}
   m_Layer: 0
   m_Name: ExplosionHeal
   m_TagString: Untagged
@@ -166,7 +166,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011356782260}
   m_RootOrder: 1
---- !u!114 &114000011684709256
+--- !u!114 &114000010895306540
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -6112,10 +6112,10 @@ ParticleSystem:
           rgba: 4293326847
         key2:
           serializedVersion: 2
-          rgba: 4289134456
+          rgba: 4290576306
         key3:
           serializedVersion: 2
-          rgba: 2948864
+          rgba: 2227968
         key4:
           serializedVersion: 2
           rgba: 0
