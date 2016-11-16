@@ -4,6 +4,7 @@ using System.Collections;
 
 public class InventoryManager : MonoBehaviour {
 
+    //inventory of the player
     private List<Material> itemsInInventory = new List<Material>();
 
     // Use this for initialization
@@ -18,12 +19,13 @@ public class InventoryManager : MonoBehaviour {
 
 	}
 
-
+    //return the inventory list if needed
     public List<Material> getInventoryList()
     {
         return itemsInInventory;
     }
 
+    //collision with the materials in the scene
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.gameObject.name);
