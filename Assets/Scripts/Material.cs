@@ -13,6 +13,9 @@ public class Material : MonoBehaviour {
     int damage = 4;
 
     [SerializeField]
+    int slow = 5;
+
+    [SerializeField]
     MaterialType type;
 
 
@@ -28,7 +31,7 @@ public class Material : MonoBehaviour {
 	void Update () {
 
 	}
-
+    //getters for health and damage
     public int getDamage()
     {
         return damage;
@@ -39,6 +42,12 @@ public class Material : MonoBehaviour {
         return health;
     }
 
+    public int getSlow()
+    {
+        return slow;
+    }
+
+    //what type of material is that 
     public MaterialType getMaterialType()
     {
         return type;
