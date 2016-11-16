@@ -55,7 +55,7 @@ GameObject:
   - 4: {fileID: 4000011356782260}
   - 198: {fileID: 198000012831875596}
   - 199: {fileID: 199000013953438510}
-  - 114: {fileID: 114000011326923390}
+  - 114: {fileID: 114000013156295102}
   m_Layer: 0
   m_Name: ExplosionSlow
   m_TagString: Untagged
@@ -166,7 +166,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011356782260}
   m_RootOrder: 1
---- !u!114 &114000011326923390
+--- !u!114 &114000013156295102
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -6111,10 +6111,10 @@ ParticleSystem:
           rgba: 4293326847
         key2:
           serializedVersion: 2
-          rgba: 4294938757
+          rgba: 4294949056
         key3:
           serializedVersion: 2
-          rgba: 16740725
+          rgba: 16724323
         key4:
           serializedVersion: 2
           rgba: 0
