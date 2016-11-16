@@ -4,8 +4,8 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
-/Scene/
-/Scene.meta
+/Assets/Scenes/
+/Assets/Scenes.meta
 /Assets/CubeSpace/
 /Assets/CubeSpace.meta
 
