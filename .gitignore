@@ -32,3 +32,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+<<<<<<< HEAD
+=======
+
+/Assets/Scenes/
+>>>>>>> 0a06cb90b469a536bc101fc84c2c6a75817901ef
