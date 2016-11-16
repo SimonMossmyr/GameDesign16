@@ -55,15 +55,15 @@ GameObject:
   - 4: {fileID: 4000011356782260}
   - 198: {fileID: 198000012831875596}
   - 199: {fileID: 199000013953438510}
-  - 114: {fileID: 114797950540960042}
-  - 114: {fileID: 114998260112294486}
+  - 114: {fileID: 114687141513749828}
+  - 114: {fileID: 114306806226458826}
   m_Layer: 0
-  m_Name: ExplosionHeal
+  m_Name: Ef_ExplosionParticle_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000013673621092
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 1000013063239222}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: -4.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000013287282806}
@@ -167,7 +167,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000011356782260}
   m_RootOrder: 1
---- !u!114 &114797950540960042
+--- !u!114 &114306806226458826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013063239222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dc729e172e144318265c027f261867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0.5
+  Damage: 50
+--- !u!114 &114687141513749828
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -178,19 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccbb908adff145d1a8e2d68a7386409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114998260112294486
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013063239222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e8462f589b7d49de8bf245888f37383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Radius: 0.4
-  Amount: 50
 --- !u!198 &198000010245698542
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -5847,9 +5847,14 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 0
+        m_RotationOrder: 4
       minCurve:
         serializedVersion: 2
         m_Curve:
@@ -5866,7 +5871,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      minMaxState: 1
+      minMaxState: 0
     z:
       scalar: 1
       maxCurve:
@@ -5877,9 +5882,14 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 0
+        m_RotationOrder: 4
       minCurve:
         serializedVersion: 2
         m_Curve:
@@ -5896,7 +5906,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      minMaxState: 1
+      minMaxState: 0
     separateAxes: 0
   RotationModule:
     enabled: 0
@@ -6019,10 +6029,10 @@ ParticleSystem:
           rgba: 4293326847
         key2:
           serializedVersion: 2
-          rgba: 4284809059
+          rgba: 4278234879
         key3:
           serializedVersion: 2
-          rgba: 1572608
+          rgba: 255
         key4:
           serializedVersion: 2
           rgba: 0
@@ -6037,7 +6047,7 @@ ParticleSystem:
           rgba: 0
         ctime0: 0
         ctime1: 9830
-        ctime2: 11372
+        ctime2: 10794
         ctime3: 26407
         ctime4: 65535
         ctime5: 0
@@ -8799,7 +8809,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -8844,7 +8854,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -8889,7 +8899,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -8934,7 +8944,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -8979,7 +8989,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedWireframeHidden: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
