@@ -118,7 +118,7 @@ public class BombWindow : MonoBehaviour {
                 //drop the bomb
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
-                Instantiate(bombHeal, pos, Quaternion.identity);
+                Instantiate(bombHeal, player.transform.position, Quaternion.identity);
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[3]")
@@ -129,7 +129,7 @@ public class BombWindow : MonoBehaviour {
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
-                Instantiate(bombSlow, pos, Quaternion.identity);
+                Instantiate(bombSlow, player.transform.position, Quaternion.identity);
             }
         }
     }
