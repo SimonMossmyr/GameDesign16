@@ -52,6 +52,14 @@ public class BombWindow : MonoBehaviour {
     // Use this for initialization
     void Start () {
 	
+        if(playerNumber == 2)
+        {
+            isFirstSlotFilled = isSecondSlotFilled = isThirdFilled = true;
+            slot1.sprite = slot1BombSprite;
+            slot2.sprite = slot2BombSprite;
+            slot3.sprite = slot3BombSprite;
+        }
+
 	}
 	
     //called from inventory window when a bomb is created. 
@@ -99,10 +107,7 @@ public class BombWindow : MonoBehaviour {
                 //drop the bomb
                 slot1.sprite = emptySlotSprite;
                 isFirstSlotFilled = false;
-
                 Instantiate(bombDamage, player.transform.position, Quaternion.identity);
-
-
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[2]")
