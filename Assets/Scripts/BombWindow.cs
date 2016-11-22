@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class BombWindow : MonoBehaviour {
 
@@ -35,11 +36,11 @@ public class BombWindow : MonoBehaviour {
 
     //empty bomb slots that will be filled
     [SerializeField]
-    Image slot1;
+    Image slot1; // damage
     [SerializeField]
-    Image slot2;
+    Image slot2; // heal
     [SerializeField]
-    Image slot3;
+    Image slot3; // slow
 
     [SerializeField]
     GameObject bombDamage;
@@ -48,40 +49,89 @@ public class BombWindow : MonoBehaviour {
     [SerializeField]
     GameObject bombSlow;
 
+    List<Material> itemsInInventory;
+    Material materal,material2,material3;
 
     // Use this for initialization
     void Start () {
-	
-        if(playerNumber == 2)
+
+        materal = new Material();
+        materal.setDamage(26);
+        materal.setHealth(2);
+        materal.setSlow(2);
+
+        material2 = new Material();
+        material2.setDamage(26);
+        material2.setHealth(2);
+        material2.setSlow(2);
+
+        material3 = new Material();
+        material3.setDamage(26);
+        material3.setHealth(2);
+        material3.setSlow(2);
+
+
+
+        if (playerNumber == 2)
         {
             isFirstSlotFilled = isSecondSlotFilled = isThirdFilled = true;
-            slot1.sprite = slot1BombSprite;
-            slot2.sprite = slot2BombSprite;
-            slot3.sprite = slot3BombSprite;
+            slot1.sprite = slot1BombSprite; // damage
+            slot2.sprite = slot2BombSprite; // heal 
+            slot3.sprite = slot3BombSprite; // slow
         }
 
 	}
 	
     //called from inventory window when a bomb is created. 
-    public void fillBombs()
+    public void fillBombs(int craftedBomb)
     {
+        //initialize the list
+        itemsInInventory = gameObject.GetComponent<InventoryManager>().getInventoryList();
+
+        Debug.Log(craftedBomb);
         //if the first slot if not filled, add the bomb to the slot
-        if( !isFirstSlotFilled)
+        Sprite bombSprite = null;
+        if (craftedBomb == 1)
         {
-            slot1.sprite = slot1BombSprite;
+            bombSprite = slot1BombSprite; // damage
+            materal.setMaterialType(Material.MaterialType.Material1);
+            itemsInInventory.Add(materal);
+        }
+
+        else if (craftedBomb == 3)
+        {
+            bombSprite = slot2BombSprite; // heal 
+            materal.setMaterialType(Material.MaterialType.Material1);
+            material2.setMaterialType(Material.MaterialType.Material2);
+            itemsInInventory.Add(materal);
+            itemsInInventory.Add(material2);
+        }
+        else if(craftedBomb == 6) { 
+            bombSprite = slot3BombSprite; // slow
+            materal.setMaterialType(Material.MaterialType.Material1);
+            material2.setMaterialType(Material.MaterialType.Material2);
+            material3.setMaterialType(Material.MaterialType.Material3);
+            itemsInInventory.Add(materal);
+            itemsInInventory.Add(material2);
+            itemsInInventory.Add(material3);
+        }
+
+        if ( !isFirstSlotFilled)
+        {
+            slot1.sprite = bombSprite;
             //set the flag to true to know if it has a bomb
             isFirstSlotFilled = true;
         }
         //if not, add to second slot 
         else if ( !isSecondSlotFilled )
         {
-            slot2.sprite = slot2BombSprite;
+            slot2.sprite = bombSprite;
             isSecondSlotFilled = true;
         }
         //if not add to third
         else if(!isThirdFilled)
         {
-            slot2.sprite = slot3BombSprite;
+            slot2.sprite = bombSprite;
             isThirdFilled = true;
         }
     }
@@ -108,6 +158,9 @@ public class BombWindow : MonoBehaviour {
                 slot1.sprite = emptySlotSprite;
                 isFirstSlotFilled = false;
                 Instantiate(bombDamage, player.transform.position, Quaternion.identity);
+                    
+                gameObject.GetComponent<InventoryManager>().setInventoryList(itemsInInventory);
+
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[2]")
@@ -119,6 +172,8 @@ public class BombWindow : MonoBehaviour {
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
                 Instantiate(bombHeal, player.transform.position, Quaternion.identity);
+
+                gameObject.GetComponent<InventoryManager>().setInventoryList(itemsInInventory);
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[3]")
@@ -130,6 +185,9 @@ public class BombWindow : MonoBehaviour {
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
                 Instantiate(bombSlow, player.transform.position, Quaternion.identity);
+        
+                gameObject.GetComponent<InventoryManager>().setInventoryList(itemsInInventory);
+
             }
         }
     }

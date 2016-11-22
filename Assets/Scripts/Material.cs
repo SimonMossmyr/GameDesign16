@@ -31,10 +31,16 @@ public class Material : MonoBehaviour {
 	void Update () {
 
 	}
+
     //getters for health and damage
     public int getDamage()
     {
         return damage;
+    }
+
+    public void setDamage(int val)
+    {
+        damage = val;
     }
 
     public int getHealth()
@@ -42,9 +48,19 @@ public class Material : MonoBehaviour {
         return health;
     }
 
+    public void setHealth(int val)
+    {
+        health = val;
+    }
+
     public int getSlow()
     {
         return slow;
+    }
+
+    public void setSlow(int val)
+    {
+        slow = val;
     }
 
     //what type of material is that 
@@ -52,4 +68,11 @@ public class Material : MonoBehaviour {
     {
         return type;
     }
+
+    public void setMaterialType(MaterialType val)
+    {
+        type = val;
+    }
+
+
 }

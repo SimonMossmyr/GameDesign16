@@ -22,6 +22,11 @@ public class InventoryManager : MonoBehaviour {
         return itemsInInventory;
     }
 
+    public void setInventoryList(List<Material> val)
+    {
+        itemsInInventory = val;
+    }
+
     //collision with the materials in the scene
     void OnTriggerEnter2D(Collider2D other)
     {
