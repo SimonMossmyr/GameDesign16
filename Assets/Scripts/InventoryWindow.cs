@@ -61,6 +61,9 @@ public class InventoryWindow : MonoBehaviour {
     bool isSlotTwoFilled = false;
     bool isSlotThreeFilled = false;
 
+    int bombCombination = 0;
+
+
     //inventory of the player
     List<Material> items;
 
@@ -123,8 +126,27 @@ public class InventoryWindow : MonoBehaviour {
         if (other.gameObject.tag == "Player1Corner" || other.gameObject.tag == "Player2Corner")
         {
             CanvasObject.enabled = false;
-
+            //set to 0 because we are re calculating them when the player enters to the area
             mat1 = mat2 = mat3 = 0;
+        }
+    }
+
+    void fillSlots(Sprite materialSprite)
+    {
+        if( !isSlotOneFilled)
+        {
+            slot1.sprite = materialSprite;
+            isSlotOneFilled = true;
+        }
+        else if (!isSlotTwoFilled)
+        {
+            slot2.sprite = materialSprite;
+            isSlotTwoFilled = true;
+        }
+        else
+        {
+            slot3.sprite = materialSprite;
+            isSlotThreeFilled = true;
         }
     }
 
@@ -138,11 +160,11 @@ public class InventoryWindow : MonoBehaviour {
                 || Input.GetKeyDown("4") && mat1 > 0 && playerNumber == 1)
             {
                 //slot 1 is activated
-                isSlotOneFilled = true;
-
-                slot1.sprite = slot1Sprite;
+                fillSlots(slot1Sprite);
                 //remove the inventory from the inventory list
                 mat1--;
+
+                bombCombination += 1;
                 //also remove from the player inventory
                 foreach (Material mat in items)
                 {
@@ -156,11 +178,9 @@ public class InventoryWindow : MonoBehaviour {
             if(Input.GetKeyDown("[5]") && mat2 > 0 && playerNumber == 2
                 || Input.GetKeyDown("5") && mat2 > 0 && playerNumber == 1)
             {
-
-                isSlotTwoFilled = true;
-
-                slot2.sprite = slot2Sprite;
+                fillSlots(slot2Sprite);
                 mat2--;
+                bombCombination += 2;
                 foreach (Material mat in items)
                 {
                     if (mat.getMaterialType() == Material.MaterialType.Material2)
@@ -173,10 +193,9 @@ public class InventoryWindow : MonoBehaviour {
             if (Input.GetKeyDown("[6]") && mat3 > 0 && playerNumber == 2
                 || Input.GetKeyDown("6") && mat3 > 0 && playerNumber == 1)
             {
-                isSlotThreeFilled = true;
-
-                slot3.sprite = slot3Sprite;
+                fillSlots(slot3Sprite);
                 mat3--;
+                bombCombination += 3;
                 foreach (Material mat in items)
                 {
                     if (mat.getMaterialType() == Material.MaterialType.Material3)
@@ -204,7 +223,8 @@ public class InventoryWindow : MonoBehaviour {
                 slot3.sprite = emptySlotSprite;
 
                 BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
-                playerBombWindow.fillBombs();
+                playerBombWindow.fillBombs(bombCombination);
+                bombCombination = 0;
             }
         }
 	}
