@@ -74,30 +74,6 @@ public class BombWindow : MonoBehaviour {
 
 	}
 	
-    public GameObject returnMaterialToInventory()
-    {
-        if (slot1.sprite == slot1BombSprite)
-        {
-            Debug.Log("damage");
-
-            return bombDamage;
-        }
-
-        else if (slot2.sprite == slot2BombSprite)
-        {
-            Debug.Log("heal");
- 
-            return bombHeal;
-        }
-        else if (slot3.sprite == slot3BombSprite)
-        {
-            Debug.Log("slow");
- 
-            return bombSlow;
-        }
-        else
-            return null;
-    }
 
     //called from inventory window when a bomb is created. 
     public void fillBombs(int craftedBomb)
@@ -105,7 +81,7 @@ public class BombWindow : MonoBehaviour {
         //initialize the list
         itemsInInventory = gameObject.GetComponent<InventoryManager>().getInventoryList();
 
-        Debug.Log(craftedBomb);
+        //Debug.Log(craftedBomb);
         //if the first slot if not filled, add the bomb to the slot
         Sprite bombSprite = null;
 
@@ -127,7 +103,7 @@ public class BombWindow : MonoBehaviour {
             bombToCreate = bombSlow;
             flag = 3;
         }
-
+        Debug.Log("third is retarded: " + isThirdFilled);
         if ( !isFirstSlotFilled)
         {
             slot1.sprite = bombSprite;
@@ -144,10 +120,11 @@ public class BombWindow : MonoBehaviour {
             isSecondSlotFilled = true;
             bombslotId[1] = flag;
         }
+     
         //if not add to third
         else if(!isThirdFilled)
         {
-            slot2.sprite = bombSprite;
+            slot3.sprite = bombSprite;
             isThirdFilled = true;
             bombslotId[2] = flag;
         }
@@ -204,7 +181,7 @@ public class BombWindow : MonoBehaviour {
         {
             if (isSecondSlotFilled)
             {
-                Debug.Log("adsasadd " + bombslotId[1]);
+               
                 GameObject bomb;
                 if (bombslotId[1] == 1)
                 {

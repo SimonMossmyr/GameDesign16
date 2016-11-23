@@ -20,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - EffectLayer
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
   - name: Sprite1
     uniqueID: 3018003825
     locked: 0
-  - name: New Layer
+  - name: EffectSortingLayer
+    uniqueID: 2985113045
+    locked: 0
+  - name: MyUI
     uniqueID: 968092603
     locked: 0

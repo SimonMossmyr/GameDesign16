@@ -27,19 +27,23 @@ public class PlayerMovement : MonoBehaviour {
         if(movementX > 0.0001)
         {
             isFacingEast = true;
+            isFacingNorth = false;
         }
         else if (movementX < -0.0001)
         {
             isFacingEast = false;
+            isFacingNorth = false;
         }
 
         if (movementY > 0.0001)
         {
             isFacingNorth = true;
+            isFacingEast = false;
         }
         else if (movementY < -0.0001)
         {
             isFacingNorth = false;
+            isFacingEast = false;
         }
 
         /*
