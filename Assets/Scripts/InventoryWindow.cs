@@ -67,6 +67,8 @@ public class InventoryWindow : MonoBehaviour {
     //inventory of the player
     List<Material> items;
 
+    InventoryManager inventoryOfThePlayer;
+
     void Start () {
 
         //initialize the list
@@ -97,22 +99,13 @@ public class InventoryWindow : MonoBehaviour {
             CanvasObject.enabled = true;
             //get the player inventory
             items = gameObject.GetComponent<InventoryManager>().getInventoryList();
-            //count the materials the player has
-            foreach (Material mat in items)
-            {
-                if(mat.getMaterialType() == Material.MaterialType.Material1)
-                {
-                    mat1++;
-                }
-                else if (mat.getMaterialType() == Material.MaterialType.Material2)
-                {
-                    mat2++;
-                }
-                else
-                {
-                    mat3++;
-                }
-            }
+            inventoryOfThePlayer = gameObject.GetComponent<InventoryManager>();
+
+
+            mat1 = inventoryOfThePlayer.getMaterial1Count();
+            mat2 = inventoryOfThePlayer.getMaterial2Count();
+            mat3 = inventoryOfThePlayer.getMaterial3Count();
+
             //update the text of the inventory canvas
             material1Text.text = mat1 + "";
             material2Text.text = mat2 + "";
@@ -128,6 +121,9 @@ public class InventoryWindow : MonoBehaviour {
             CanvasObject.enabled = false;
             //set to 0 because we are re calculating them when the player enters to the area
             mat1 = mat2 = mat3 = 0;
+            slot1.sprite = emptySlotSprite;
+            slot2.sprite = emptySlotSprite;
+            slot3.sprite = emptySlotSprite;
         }
     }
 
@@ -163,16 +159,7 @@ public class InventoryWindow : MonoBehaviour {
                 fillSlots(slot1Sprite);
                 //remove the inventory from the inventory list
                 mat1--;
-
                 bombCombination += 1;
-                //also remove from the player inventory
-                foreach (Material mat in items)
-                {
-                    if (mat.getMaterialType() == Material.MaterialType.Material1)
-                    {
-                        items.Remove(mat);
-                    }
-                }
             }
 
             if(Input.GetKeyDown("[5]") && mat2 > 0 && playerNumber == 2
@@ -181,13 +168,6 @@ public class InventoryWindow : MonoBehaviour {
                 fillSlots(slot2Sprite);
                 mat2--;
                 bombCombination += 2;
-                foreach (Material mat in items)
-                {
-                    if (mat.getMaterialType() == Material.MaterialType.Material2)
-                    {
-                        items.Remove(mat);
-                    }
-                }
             }
 
             if (Input.GetKeyDown("[6]") && mat3 > 0 && playerNumber == 2
@@ -196,13 +176,6 @@ public class InventoryWindow : MonoBehaviour {
                 fillSlots(slot3Sprite);
                 mat3--;
                 bombCombination += 3;
-                foreach (Material mat in items)
-                {
-                    if (mat.getMaterialType() == Material.MaterialType.Material3)
-                    {
-                        items.Remove(mat);
-                    }
-                }
             }
             //update the text in the canvas
             material1Text.text = mat1 + "";
@@ -213,18 +186,26 @@ public class InventoryWindow : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.KeypadEnter) && playerNumber == 2
                 || Input.GetKeyDown(KeyCode.Return) && playerNumber == 1)
             {
-                //slots are empty
-                isSlotOneFilled = false;
-                isSlotThreeFilled = false;
-                isSlotTwoFilled = false;
-                //replace with default empty slot sprite
-                slot1.sprite = emptySlotSprite;
-                slot2.sprite = emptySlotSprite;
-                slot3.sprite = emptySlotSprite;
 
-                BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
-                playerBombWindow.fillBombs(bombCombination);
-                bombCombination = 0;
+                if( bombCombination == 1 || bombCombination == 3 || bombCombination == 6)
+                {
+                    //slots are empty
+                    isSlotOneFilled = false;
+                    isSlotThreeFilled = false;
+                    isSlotTwoFilled = false;
+                    //replace with default empty slot sprite
+                    slot1.sprite = emptySlotSprite;
+                    slot2.sprite = emptySlotSprite;
+                    slot3.sprite = emptySlotSprite;
+
+                    inventoryOfThePlayer.setMaterial3Count(mat3);
+                    inventoryOfThePlayer.setMaterial2Count(mat2);
+                    inventoryOfThePlayer.setMaterial1Count(mat1);
+
+                    BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
+                    playerBombWindow.fillBombs(bombCombination);
+                    bombCombination = 0;
+                }
             }
         }
 	}
