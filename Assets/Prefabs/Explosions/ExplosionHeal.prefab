@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010389990062}
   - 198: {fileID: 198000011539581918}
   - 199: {fileID: 199000013881561102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ef_ExplosionPartsParticle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - 4: {fileID: 4000011108847672}
   - 198: {fileID: 198000013461985240}
   - 199: {fileID: 199000012009448346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ef_ExpPartParticle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - 198: {fileID: 198000012831875596}
   - 199: {fileID: 199000013953438510}
   - 114: {fileID: 114000010895306540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosionHeal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - 4: {fileID: 4000014281983086}
   - 198: {fileID: 198000010245698542}
   - 199: {fileID: 199000013263800608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ef_WaveExParticle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - 4: {fileID: 4000013287282806}
   - 198: {fileID: 198000010926203772}
   - 199: {fileID: 199000013576856116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ef_GlowExParticle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

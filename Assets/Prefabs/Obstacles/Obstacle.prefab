@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.1
   durability: 3
+  numOfplayers: 2
 --- !u!212 &212000011907306910
 SpriteRenderer:
   m_ObjectHideFlags: 1

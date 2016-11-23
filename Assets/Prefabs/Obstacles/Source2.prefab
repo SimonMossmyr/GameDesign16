@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.1
   durability: 3
+  numOfplayers: 2
 --- !u!114 &114000012396790730
 MonoBehaviour:
   m_ObjectHideFlags: 1
