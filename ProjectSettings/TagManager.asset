@@ -9,6 +9,8 @@ TagManager:
   - Player2Corner
   - Player1Inventory
   - Player2Inventory
+  - InventoryCanvas
+  - Obstacles
   layers:
   - Default
   - TransparentFX
