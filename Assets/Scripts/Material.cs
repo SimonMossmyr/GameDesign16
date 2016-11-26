@@ -18,7 +18,11 @@ public class Material : MonoBehaviour {
     [SerializeField]
     MaterialType type;
 
+    [SerializeField]
+    int effect = 0;
 
+    [SerializeField]
+    int range = 0;
 
     // Use this for initialization
     void Start () {
@@ -62,6 +66,30 @@ public class Material : MonoBehaviour {
     {
         slow = val;
     }
+
+    //getters for health and damage
+    public int getEffect()
+    {
+        return effect;
+    }
+
+    public void setEffect(int val)
+    {
+        effect = val;
+    }
+
+
+    //getters for health and damage
+    public int getRange()
+    {
+        return range;
+    }
+
+    public void setRange(int val)
+    {
+        range = val;
+    }
+
 
     //what type of material is that 
     public MaterialType getMaterialType()
