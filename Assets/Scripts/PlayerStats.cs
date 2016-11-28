@@ -7,9 +7,11 @@ public class PlayerStats : MonoBehaviour {
 	[Range(0,1)]
 	public int PlayerNumber;
 	public float HealthPoints;
+    private float actionTime;
+    public float actionDuration = 0.5f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -21,4 +23,19 @@ public class PlayerStats : MonoBehaviour {
 	public void AddHealth(float delta) {
 		HealthPoints += delta;
 	}
+
+    public void TimeAction()
+    {
+        actionTime = Time.realtimeSinceStartup;
+    }
+
+    private float timeSinceLastAction()
+    {
+        return Time.realtimeSinceStartup - actionTime;
+    }
+
+    public bool actionDurationOver()
+    {
+        return (timeSinceLastAction() > actionDuration);
+    }
 }
