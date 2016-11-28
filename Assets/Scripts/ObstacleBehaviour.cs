@@ -29,10 +29,11 @@ public class ObstacleBehaviour : MonoBehaviour {
 
                 foreach (GameObject player in players)
                 {
-                    if (player.GetComponent<PlayerStats>().PlayerNumber == i)
+                    if (player.GetComponent<PlayerStats>().PlayerNumber == i && player.GetComponent<PlayerStats>().actionDurationOver())
                     {
                         if (Vector2.Distance(transform.position, player.transform.position) <= radius)
                         {
+                            player.GetComponent<PlayerStats>().TimeAction();
 
                             if (player.transform.position.x > transform.position.x && player.GetComponent<PlayerMovement>().getIsFacingEast() == false && player.GetComponent<PlayerMovement>().getIsFacingNorth() == false)
                             {
