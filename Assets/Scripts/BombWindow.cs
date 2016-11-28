@@ -43,18 +43,16 @@ public class BombWindow : MonoBehaviour {
     Image slot3; // slow
 
     [SerializeField]
-    GameObject bombDamage;
-    [SerializeField]
-    GameObject bombHeal;
-    [SerializeField]
-    GameObject bombSlow;
-
-    List<Material> itemsInInventory;
+    GameObject bombStandart;
+   
     Material materal,material2,material3;
 
-    GameObject bombToCreate;
-   
     int []bombslotId = new int[3];
+
+    int mat1Number, mat2Number, mat3Number;
+
+    GameObject createdBomb;
+    BombBehaviour defaultBombBeh;
 
     // Use this for initialization
     void Start () {
@@ -74,59 +72,28 @@ public class BombWindow : MonoBehaviour {
 
 	}
 	
-
-    //called from inventory window when a bomb is created. 
-    public void fillBombs(int craftedBomb)
+    public void calculateBombEffect(int mat1, int mat2, int mat3)
     {
-        //initialize the list
-        itemsInInventory = gameObject.GetComponent<InventoryManager>().getInventoryList();
+    
 
-        //Debug.Log(craftedBomb);
-        //if the first slot if not filled, add the bomb to the slot
-        Sprite bombSprite = null;
-
-        int flag = 0;
-
-        if (craftedBomb == 1){
-            bombSprite = slot1BombSprite; // damage
-            bombToCreate = bombDamage;
-            flag = 1;
-        }
-
-        else if (craftedBomb == 3){
-            bombSprite = slot2BombSprite; // heal 
-            bombToCreate = bombHeal;
-            flag = 2;
-        }
-        else if(craftedBomb == 6) { 
-            bombSprite = slot3BombSprite; // slow
-            bombToCreate = bombSlow;
-            flag = 3;
-        }
-        Debug.Log("third is retarded: " + isThirdFilled);
-        if ( !isFirstSlotFilled)
+        if (!isFirstSlotFilled)
         {
-            slot1.sprite = bombSprite;
+            slot1.sprite = slot1BombSprite;
             //set the flag to true to know if it has a bomb
             isFirstSlotFilled = true;
-
-            bombslotId[0] = flag;
-
         }
         //if not, add to second slot 
-        else if ( !isSecondSlotFilled )
+        else if (!isSecondSlotFilled)
         {
-            slot2.sprite = bombSprite;
+            slot2.sprite = slot1BombSprite;
             isSecondSlotFilled = true;
-            bombslotId[1] = flag;
         }
-     
+
         //if not add to third
-        else if(!isThirdFilled)
+        else if (!isThirdFilled)
         {
-            slot3.sprite = bombSprite;
+            slot3.sprite = slot1BombSprite;
             isThirdFilled = true;
-            bombslotId[2] = flag;
         }
     }
 
@@ -146,34 +113,13 @@ public class BombWindow : MonoBehaviour {
         {
             if ( isFirstSlotFilled)
             {
-                GameObject bomb ;
-                if (bombslotId[0] == 1)
-                {
-                    bomb = bombDamage;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                }
-                    
-                else if (bombslotId[0] == 2)
-                {
-                    bomb = bombHeal;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                }
-                    
-                else
-                {
-                    bomb = bombSlow;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial3();
-                }
-                    
 
-                Instantiate(bomb, player.transform.position, Quaternion.identity);
-                //drop the bomb
+                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
+                defaultBombBeh = asd.GetComponent<BombBehaviour>();
+                defaultBombBeh.damage = 2;
+                defaultBombBeh.setDamage(4);
                 slot1.sprite = emptySlotSprite;
                 isFirstSlotFilled = false;
-
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[2]")
@@ -181,34 +127,9 @@ public class BombWindow : MonoBehaviour {
         {
             if (isSecondSlotFilled)
             {
-               
-                GameObject bomb;
-                if (bombslotId[1] == 1)
-                {
-                    bomb = bombDamage;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                }
-
-                else if (bombslotId[1] == 2)
-                {
-                    bomb = bombHeal;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                }
-
-                else
-                {
-                    bomb = bombSlow;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial3();
-                }
-
-                Instantiate(bomb, player.transform.position, Quaternion.identity);
-                //drop the bomb
+                Instantiate(bombStandart, player.transform.position, Quaternion.identity);
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
-   
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[3]")
@@ -216,29 +137,7 @@ public class BombWindow : MonoBehaviour {
         {
             if (isThirdFilled)
             {
-                GameObject bomb;
-                if (bombslotId[2] == 1)
-                {
-                    bomb = bombDamage;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                }
-
-                else if (bombslotId[2] == 2)
-                {
-                    bomb = bombHeal;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                }
-
-                else
-                {
-                    bomb = bombSlow;
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial1();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial2();
-                    gameObject.GetComponent<InventoryManager>().incrementMaterial3();
-                }
-
-                Instantiate(bomb, player.transform.position, Quaternion.identity);
+                Instantiate(bombStandart, player.transform.position, Quaternion.identity);
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
