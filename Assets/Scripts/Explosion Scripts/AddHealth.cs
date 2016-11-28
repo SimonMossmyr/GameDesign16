@@ -9,6 +9,7 @@ public class AddHealth: MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		GameObject[] players = GameObject.FindGameObjectsWithTag ("Player");
 
 		foreach (GameObject player in players) {
