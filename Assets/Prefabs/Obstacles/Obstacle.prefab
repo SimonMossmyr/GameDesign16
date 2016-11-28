@@ -21,6 +21,8 @@ GameObject:
   - 4: {fileID: 4000013495318184}
   - 61: {fileID: 61000010287366216}
   - 114: {fileID: 114000012267441268}
+  - 114: {fileID: 114000012384780042}
+  - 114: {fileID: 114000013518320298}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacles
@@ -128,6 +130,58 @@ MonoBehaviour:
   radius: 1.1
   durability: 3
   numOfplayers: 2
+--- !u!114 &114000012384780042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010887916438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 28
+    i1: 236
+    i2: 108
+    i3: 192
+    i4: 176
+    i5: 96
+    i6: 62
+    i7: 196
+    i8: 9
+    i9: 124
+    i10: 127
+    i11: 208
+    i12: 43
+    i13: 182
+    i14: 46
+    i15: 198
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114000013518320298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010887916438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212000011907306910
 SpriteRenderer:
   m_ObjectHideFlags: 1

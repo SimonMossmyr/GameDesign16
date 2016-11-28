@@ -22,7 +22,7 @@ public class ObstacleBehaviour : MonoBehaviour {
         // Damage obstacle with player pick axe
         for (int i = 0; i < numOfplayers; i++)
         {
-            if (Input.GetButtonDown("Pick axe-P"+i))
+            if (Input.GetButtonDown("Pick axe"))
             {
 
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
