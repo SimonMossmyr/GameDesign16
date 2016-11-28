@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour {
 	public int PlayerNumber;
 	public float HealthPoints;
 	public int Lives;
+	public GameObject PlayerBase;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,14 @@ public class PlayerStats : MonoBehaviour {
 
 		if (Lives <= 0) {
 			// Lives should never be less than 0, but still
-
+			GameObject camera = GameObject.FindGameObjectWithTag ("MainCamera");
+			camera.GetComponent<CameraBehaviour> ().RemovePlayer (gameObject); // remove player from the camera system
+			Destroy (gameObject);
+		} else {
+			print ("Moving player "+gameObject+" to "+PlayerBase.transform.position);
+			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true;
+			gameObject.GetComponent<Rigidbody2D> ().position = PlayerBase.transform.position;
+			gameObject.GetComponent<Rigidbody2D> ().isKinematic = false;
 		}
 	}
 }
