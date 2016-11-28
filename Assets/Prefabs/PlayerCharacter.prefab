@@ -190,7 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNumber: 0
-  HealthPoints: 100
+  HealthPoints: 1
+  Lives: 3
+  PlayerBase: {fileID: 0}
 --- !u!114 &114000014140462006
 MonoBehaviour:
   m_ObjectHideFlags: 1
