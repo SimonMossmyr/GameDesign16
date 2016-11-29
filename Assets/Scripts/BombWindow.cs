@@ -48,6 +48,8 @@ public class BombWindow : MonoBehaviour {
     Material materal,material2,material3;
 
     int []bombslotId = new int[3];
+    int[] bombAttributes = new int[3];
+    int[,] bombSlotAttr = new int[3,3];
 
     int mat1Number, mat2Number, mat3Number;
 
@@ -74,19 +76,36 @@ public class BombWindow : MonoBehaviour {
 	
     public void calculateBombEffect(int mat1, int mat2, int mat3)
     {
-    
+        mat1Number = mat1;
+        mat2Number = mat2;
+        mat3Number = mat3;
+
+        int bombMaterialCount = (100 * mat1) + (10 * mat2) + mat3;
+
+        //Debug.Log("Combine this: " + bombMaterialCount);
 
         if (!isFirstSlotFilled)
         {
             slot1.sprite = slot1BombSprite;
             //set the flag to true to know if it has a bomb
             isFirstSlotFilled = true;
-        }
+
+            bombslotId[0] = bombMaterialCount;
+
+            bombSlotAttr[0, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
+            bombSlotAttr[0, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
+            bombSlotAttr[0, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
+        } 
         //if not, add to second slot 
         else if (!isSecondSlotFilled)
         {
             slot2.sprite = slot1BombSprite;
             isSecondSlotFilled = true;
+            bombslotId[1] = bombMaterialCount;
+
+            bombSlotAttr[1, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
+            bombSlotAttr[1, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
+            bombSlotAttr[1, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
         }
 
         //if not add to third
@@ -94,7 +113,31 @@ public class BombWindow : MonoBehaviour {
         {
             slot3.sprite = slot1BombSprite;
             isThirdFilled = true;
+            bombslotId[2] = bombMaterialCount;
+
+            bombSlotAttr[2, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
+            bombSlotAttr[2, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
+            bombSlotAttr[2, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
         }
+    }
+
+    void returnMaterials(int slot)
+    {
+
+        int totalMatCount = bombslotId[slot];
+
+        int mat1RetCount = totalMatCount / 100;
+        int mat2RetCount = totalMatCount % 100 / 10;
+        int mat3RetCount = totalMatCount % 10;
+        
+        /*
+        Debug.Log("total material used: " + totalMatCount);
+        Debug.Log("mats: " + mat1RetCount + " --- " + mat2RetCount + " --- " + mat3RetCount);
+        */
+        
+        gameObject.GetComponent<InventoryManager>().returnMaterial1(mat1RetCount);
+        gameObject.GetComponent<InventoryManager>().returnMaterial2(mat2RetCount);
+        gameObject.GetComponent<InventoryManager>().returnMaterial3(mat3RetCount);
     }
 
 	// Update is called once per frame
@@ -115,11 +158,16 @@ public class BombWindow : MonoBehaviour {
             {
 
                 GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.GetComponent<BombBehaviour>();
-                defaultBombBeh.damage = 2;
-                defaultBombBeh.setDamage(4);
+                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh.setDamage(bombSlotAttr[0, 0]);
+                defaultBombBeh.setRange(bombSlotAttr[0, 1]);
+                defaultBombBeh.setEffect(bombSlotAttr[0, 2]);
+
                 slot1.sprite = emptySlotSprite;
                 isFirstSlotFilled = false;
+
+                returnMaterials(0);
+
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[2]")
@@ -127,9 +175,16 @@ public class BombWindow : MonoBehaviour {
         {
             if (isSecondSlotFilled)
             {
-                Instantiate(bombStandart, player.transform.position, Quaternion.identity);
+                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
+                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh.setDamage(bombSlotAttr[1, 0]);
+                defaultBombBeh.setRange(bombSlotAttr[1, 1]);
+                defaultBombBeh.setEffect(bombSlotAttr[1, 2]);
+
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
+                
+                returnMaterials(1);
             }
         }
         if (playerNumber == 2 && Input.GetKeyDown("[3]")
@@ -137,11 +192,16 @@ public class BombWindow : MonoBehaviour {
         {
             if (isThirdFilled)
             {
-                Instantiate(bombStandart, player.transform.position, Quaternion.identity);
+                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
+                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh.setDamage(bombSlotAttr[2, 0]);
+                defaultBombBeh.setRange(bombSlotAttr[2, 1]);
+                defaultBombBeh.setEffect(bombSlotAttr[2, 2]);
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
-  
+
+                returnMaterials(2);
             }
         }
     }

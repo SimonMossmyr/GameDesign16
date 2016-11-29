@@ -208,12 +208,16 @@ public class InventoryWindow : MonoBehaviour {
                 inventoryOfThePlayer.setMaterial2Count(mat2);
                 inventoryOfThePlayer.setMaterial1Count(mat1);
 
-                Debug.Log("asdasd: " + cratedMaterial1 + " -- " + cratedMaterial2 + "- -- " + cratedMaterial3);
+                //Debug.Log("asdasd: " + cratedMaterial1 + " -- " + cratedMaterial2 + "- -- " + cratedMaterial3);
 
                 BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
                 playerBombWindow.calculateBombEffect(cratedMaterial1, cratedMaterial2, cratedMaterial3);
+
                 bombCombination = 0;
-                
+
+                cratedMaterial1 = 0;
+                cratedMaterial2 = 0;
+                cratedMaterial3 = 0;
             }
         }
 	}
