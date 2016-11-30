@@ -56,8 +56,26 @@ public class BombWindow : MonoBehaviour {
     GameObject createdBomb;
     BombBehaviour defaultBombBeh;
 
+    Material material1 = new Material();
+
+    Material materialtype2 = new Material();
+
+    Material materialtype3 = new Material();
+
     // Use this for initialization
     void Start () {
+
+        material1.setDamage(5);
+        material1.setEffect(6);
+        material1.setRange(10);
+
+        materialtype2.setDamage(2);
+        materialtype2.setEffect(5);
+        materialtype2.setRange(1);
+
+        materialtype3.setDamage(4);
+        materialtype3.setEffect(7);
+        materialtype3.setRange(2);
 
         bombslotId[0] = 0;
         bombslotId[1] = 0;
@@ -92,9 +110,9 @@ public class BombWindow : MonoBehaviour {
 
             bombslotId[0] = bombMaterialCount;
 
-            bombSlotAttr[0, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
-            bombSlotAttr[0, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
-            bombSlotAttr[0, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
+            bombSlotAttr[0, 0] = mat1 * material1.getDamage() + mat2 * materialtype2.getDamage() + mat3 * materialtype3.getDamage();
+            bombSlotAttr[0, 1] = mat1 * material1.getEffect() + mat2 * materialtype2.getEffect() + mat3 * materialtype3.getEffect();
+            bombSlotAttr[0, 2] = mat1 * material1.getRange() + mat2 * materialtype2.getRange() + mat3 * materialtype3.getRange();
         } 
         //if not, add to second slot 
         else if (!isSecondSlotFilled)
@@ -103,9 +121,9 @@ public class BombWindow : MonoBehaviour {
             isSecondSlotFilled = true;
             bombslotId[1] = bombMaterialCount;
 
-            bombSlotAttr[1, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
-            bombSlotAttr[1, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
-            bombSlotAttr[1, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
+            bombSlotAttr[1, 0] = mat1 * material1.getDamage() + mat2 * materialtype2.getDamage() + mat3 * materialtype3.getDamage();
+            bombSlotAttr[1, 1] = mat1 * material1.getEffect() + mat2 * materialtype2.getEffect() + mat3 * materialtype3.getEffect();
+            bombSlotAttr[1, 2] = mat1 * material1.getRange() + mat2 * materialtype2.getRange() + mat3 * materialtype3.getRange();
         }
 
         //if not add to third
@@ -115,9 +133,9 @@ public class BombWindow : MonoBehaviour {
             isThirdFilled = true;
             bombslotId[2] = bombMaterialCount;
 
-            bombSlotAttr[2, 0] = mat1 * 3 + mat2 * 2 + mat3 * 1;
-            bombSlotAttr[2, 1] = mat1 * 1 + mat2 * 3 + mat3 * 2;
-            bombSlotAttr[2, 2] = mat1 * 2 + mat2 * 1 + mat3 * 3;
+            bombSlotAttr[2, 0] = mat1 * material1.getDamage() + mat2 * materialtype2.getDamage() + mat3 * materialtype3.getDamage();
+            bombSlotAttr[2, 1] = mat1 * material1.getEffect() + mat2 * materialtype2.getEffect() + mat3 * materialtype3.getEffect();
+            bombSlotAttr[2, 2] = mat1 * material1.getRange() + mat2 * materialtype2.getRange() + mat3 * materialtype3.getRange();
         }
     }
 
