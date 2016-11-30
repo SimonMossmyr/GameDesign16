@@ -7,22 +7,22 @@ public class Material : MonoBehaviour {
 
     //take as an input from the editor
     [SerializeField]
-    int health = 2;
+    float health = 2;
 
     [SerializeField]
-    int damage = 4;
+    float damage = 4;
 
     [SerializeField]
-    int slow = 5;
+    float slow = 5;
 
     [SerializeField]
     MaterialType type;
 
     [SerializeField]
-    int effect = 0;
+    float effect = 0;
 
     [SerializeField]
-    int range = 0;
+    float range = 0;
 
     // Use this for initialization
     void Start () {
@@ -37,27 +37,27 @@ public class Material : MonoBehaviour {
 	}
 
     //getters for health and damage
-    public int getDamage()
+    public float getDamage()
     {
         return damage;
     }
 
-    public void setDamage(int val)
+    public void setDamage(float val)
     {
         damage = val;
     }
 
-    public int getHealth()
+    public float getHealth()
     {
         return health;
     }
 
-    public void setHealth(int val)
+    public void setHealth(float val)
     {
         health = val;
     }
 
-    public int getSlow()
+    public float getSlow()
     {
         return slow;
     }
@@ -68,24 +68,24 @@ public class Material : MonoBehaviour {
     }
 
     //getters for health and damage
-    public int getEffect()
+    public float getEffect()
     {
         return effect;
     }
 
-    public void setEffect(int val)
+    public void setEffect(float val)
     {
         effect = val;
     }
 
 
     //getters for health and damage
-    public int getRange()
+    public float getRange()
     {
         return range;
     }
 
-    public void setRange(int val)
+    public void setRange(float val)
     {
         range = val;
     }
