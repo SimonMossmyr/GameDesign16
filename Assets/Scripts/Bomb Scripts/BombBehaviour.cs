@@ -9,7 +9,7 @@ public class BombBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        damage = effect = range = 0;
+        //damage = effect = range = 0;
         floag = false;
     }
 	
@@ -49,7 +49,7 @@ public class BombBehaviour : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        //Debug.Log(damage + " --- " + effect + " ---  " + range);
+        Debug.Log(damage + " --- " + effect + " ---  " + range);
         if (floag)
             Debug.Log("asdasdasdsadasdas " + damage);
 	}
