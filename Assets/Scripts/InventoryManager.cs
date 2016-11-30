@@ -70,6 +70,19 @@ public class InventoryManager : MonoBehaviour {
         material3Count++;
     }
 
+    public void returnMaterial1(int val)
+    {
+        material1Count+=val;
+    }
+    public void returnMaterial2(int val)
+    {
+        material2Count += val;
+    }
+    public void returnMaterial3(int val)
+    {
+        material3Count += val;
+    }
+
     //collision with the materials in the scene
     void OnTriggerEnter2D(Collider2D other)
     {
