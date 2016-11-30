@@ -83,14 +83,6 @@ public class BombWindow : MonoBehaviour {
         bombslotId[2] = 0;
 
         // comes from the old demo. We add all the bombs to player 2. Delete this if you want player 2 to craft materials
-        if (playerNumber == 2)
-        {
-            isFirstSlotFilled = isSecondSlotFilled = isThirdFilled = true;
-            slot1.sprite = slot1BombSprite; // damage
-            slot2.sprite = slot2BombSprite; // heal 
-            slot3.sprite = slot3BombSprite; // slow
-
-        }
 
 	}
 	
