@@ -31,23 +31,26 @@ public class ObstacleBehaviour : MonoBehaviour {
                 {
                     if (player.GetComponent<PlayerStats>().PlayerNumber == i && player.GetComponent<PlayerStats>().actionDurationOver())
                     {
+                        
                         if (Vector2.Distance(transform.position, player.transform.position) <= radius)
                         {
+                            Debug.Log(transform.position);
+
                             player.GetComponent<PlayerStats>().TimeAction();
 
-                            if (player.transform.position.x > transform.position.x && player.GetComponent<PlayerMovement>().getIsFacingEast() == false && player.GetComponent<PlayerMovement>().getIsFacingNorth() == false)
+                            if (player.transform.position.x > transform.position.x && player.GetComponent<PlayerMovement>().getFacingDirection() == 4)
                             {
                                 durabilityLeft -= 1;
                             }
-                            else if (player.transform.position.x < transform.position.x && player.GetComponent<PlayerMovement>().getIsFacingEast() == true && player.GetComponent<PlayerMovement>().getIsFacingNorth() == false)
+                            else if (player.transform.position.x < transform.position.x && player.GetComponent<PlayerMovement>().getFacingDirection() == 0)
                             {
                                 durabilityLeft -= 1;
                             }
-                            if (player.transform.position.y > transform.position.y && player.GetComponent<PlayerMovement>().getIsFacingNorth() == false && player.GetComponent<PlayerMovement>().getIsFacingEast() == false)
+                            if (player.transform.position.y > transform.position.y && player.GetComponent<PlayerMovement>().getFacingDirection() == 6)
                             {
                                 durabilityLeft -= 1;
                             }
-                            else if (player.transform.position.y < transform.position.y && player.GetComponent<PlayerMovement>().getIsFacingNorth() == true && player.GetComponent<PlayerMovement>().getIsFacingEast() == false)
+                            else if (player.transform.position.y < transform.position.y && player.GetComponent<PlayerMovement>().getFacingDirection() == 2)
                             {
                                 durabilityLeft -= 1;
                             }
