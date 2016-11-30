@@ -7,43 +7,75 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	private int playerNumber;
 
-    private bool isFacingEast;
-    private bool isFacingNorth;
+    private int facingDirection = 6;
+    private float deadZone = 0.1f;
+    private SpriteAnimator animator;
 
     // Use this for initialization
     void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		playerNumber = gameObject.GetComponent<PlayerStats> ().PlayerNumber;
-	}
+        animator = transform.GetComponentInChildren<SpriteAnimator>();
+
+    }
 	
 	// FixedUpdate is called once per physics frame
 	void FixedUpdate () {
-		/*
+        /*
 		 * Calculate directional movement.
 		 */
-		float movementX = Input.GetAxisRaw("Horizontal-P"+playerNumber) * Time.deltaTime * speed;
-		float movementY = Input.GetAxisRaw("Vertical-P"+playerNumber) * Time.deltaTime * speed;
+        float rawAxisX = Input.GetAxisRaw("Horizontal-P" + playerNumber);
+        float rawAxisY = Input.GetAxisRaw("Vertical-P" + playerNumber);
 
-        if(movementX > 0.0001)
-        {
-            isFacingEast = true;
-            isFacingNorth = false;
-        }
-        else if (movementX < -0.0001)
-        {
-            isFacingEast = false;
-            isFacingNorth = false;
-        }
+        float movementX = rawAxisX * Time.deltaTime * speed;
+		float movementY = rawAxisY * Time.deltaTime * speed;
 
-        if (movementY > 0.0001)
+        // Update facing direction
+        if(rawAxisX == 0 && rawAxisY == 0)
         {
-            isFacingNorth = true;
-            isFacingEast = false;
+            if (animator.currentAnimation.name == "WalkingEast")
+            {
+                animator.Play("IdleEast");
+            }
+            else if (animator.currentAnimation.name == "WalkingNorth")
+            {
+                animator.Play("IdleNorth");
+            }
+            else if (animator.currentAnimation.name == "WalkingWest")
+            {
+                animator.Play("IdleWest");
+            }
+            else if (animator.currentAnimation.name == "WalkingSouth")
+            {
+                animator.Play("IdleSouth");
+            }
         }
-        else if (movementY < -0.0001)
+        else
         {
-            isFacingNorth = false;
-            isFacingEast = false;
+            if (rawAxisX > deadZone && rawAxisY == 0)
+            {
+                facingDirection = 0;
+                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+                    animator.Play("WalkingEast");
+            }
+            else if (rawAxisY > deadZone && rawAxisX == 0)
+            {
+                facingDirection = 2;
+                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+                    animator.Play("WalkingNorth");
+            }
+            else if (rawAxisX < deadZone && rawAxisY == 0)
+            {
+                facingDirection = 4;
+                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+                    animator.Play("WalkingWest");
+            }
+            else if (rawAxisY < deadZone && rawAxisX == 0)
+            {
+                facingDirection = 6;
+                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+                    animator.Play("WalkingSouth");
+            }
         }
 
         /*
@@ -53,17 +85,14 @@ public class PlayerMovement : MonoBehaviour {
 		rb2d.MovePosition (rb2d.position + movement);
     }
 
+
+
 	public void AddSpeed(float amount) {
 		speed += amount;
 	}
 
-    public bool getIsFacingEast()
+    public int getFacingDirection()
     {
-        return isFacingEast;
-    }
-
-    public bool getIsFacingNorth()
-    {
-        return isFacingNorth;
+        return facingDirection;
     }
 }

@@ -17,6 +17,9 @@ public class SpriteAnimator : MonoBehaviour
 		public int fps;
 		public Sprite[] frames;
 
+        public string returnAnimation;
+        public int repeats = 1;
+
 		public AnimationTrigger[] triggers;
 	}
 
@@ -27,6 +30,7 @@ public class SpriteAnimator : MonoBehaviour
 	public Animation currentAnimation { get; private set; }
 	public int currentFrame { get; private set; }
 	public bool loop { get; private set; }
+    private int loopCycles = 0;
 
 	public string playAnimationOnStart;
 
@@ -50,7 +54,7 @@ public class SpriteAnimator : MonoBehaviour
 
 	public void Play(string name, bool loop = true, int startFrame = 0)
 	{
-		Animation animation = GetAnimation(name);
+        Animation animation = GetAnimation(name);
 		if (animation != null )
 		{
 			if (animation != currentAnimation)
@@ -66,7 +70,9 @@ public class SpriteAnimator : MonoBehaviour
 
 	public void ForcePlay(string name, bool loop = true, int startFrame = 0)
 	{
-		Animation animation = GetAnimation(name);
+        loopCycles = 0;
+
+        Animation animation = GetAnimation(name);
 		if (animation != null)
 		{
 			this.loop = loop;
@@ -81,7 +87,7 @@ public class SpriteAnimator : MonoBehaviour
 
 	public void SlipPlay(string name, int wantFrame, params string[] otherNames)
 	{
-		for (int i = 0; i < otherNames.Length; i++)
+        for (int i = 0; i < otherNames.Length; i++)
 		{
 			if (currentAnimation != null && currentAnimation.name == otherNames[i])
 			{
@@ -111,12 +117,16 @@ public class SpriteAnimator : MonoBehaviour
 
 	IEnumerator PlayAnimation(Animation animation)
 	{
-		float timer = 0f;
+        float timer = 0f;
 		float delay = 1f / (float)animation.fps;
-		while (loop || currentFrame < animation.frames.Length-1)
+		while (loop || currentFrame < animation.frames.Length)
 		{
+            if (loopCycles > animation.repeats && animation.returnAnimation != "")
+            {
+                Play(animation.returnAnimation);
+            }
 
-			while (timer < delay)
+            while (timer < delay)
 			{
 				timer += Time.deltaTime;
 				yield return 0f;
@@ -124,7 +134,8 @@ public class SpriteAnimator : MonoBehaviour
 			while (timer > delay)
 			{
 				timer -= delay;
-				NextFrame(animation);
+
+                NextFrame(animation);
 			}
 
 			spriteRenderer.sprite = animation.frames[currentFrame];
@@ -135,8 +146,9 @@ public class SpriteAnimator : MonoBehaviour
 
 	void NextFrame(Animation animation)
 	{
-		currentFrame++;
-		foreach (AnimationTrigger animationTrigger in currentAnimation.triggers)
+        currentFrame++;
+
+        foreach (AnimationTrigger animationTrigger in currentAnimation.triggers)
 		{
 			if (animationTrigger.frame == currentFrame)
 			{
@@ -146,9 +158,11 @@ public class SpriteAnimator : MonoBehaviour
 
 		if (currentFrame >= animation.frames.Length)
 		{
-			if (loop)
+            loopCycles++;
+
+            if (loop)
 				currentFrame = 0;
-			else
+            else
 				currentFrame = animation.frames.Length - 1;
 		}
 	}
