@@ -20,6 +20,17 @@ public class BombBehaviour : MonoBehaviour {
         Debug.Log("called " + damage + " ---- " + effect+ " --- " + range);
     }
 
+
+	public void checkCollison(){
+		Collider2D[] explosion = Physics2D.OverlapCircleAll (transform.position, range);
+		foreach (Collider2D i in explosion) {
+			if (i.gameObject.tag == "Player") {
+				i.gameObject.GetComponent<PlayerStats> ().AddHealth(-damage);
+			}
+		}
+			
+
+	}
     public void setEffect(int val)
     {
         Debug.Log("called2");
