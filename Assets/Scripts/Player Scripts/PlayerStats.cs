@@ -7,8 +7,6 @@ public class PlayerStats : MonoBehaviour {
 	[Range(0,1)]
 	public int PlayerNumber;
 	public float HealthPoints;
-    private float actionTime;
-    public float actionDuration = 0.5f;
 	public int Lives;
 	public GameObject PlayerBase;
 
@@ -46,19 +44,4 @@ public class PlayerStats : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody2D> ().isKinematic = false;
 		}
 	}
-
-    public void TimeAction()
-    {
-        actionTime = Time.realtimeSinceStartup;
-    }
-
-    private float timeSinceLastAction()
-    {
-        return Time.realtimeSinceStartup - actionTime;
-    }
-
-    public bool actionDurationOver()
-    {
-        return (timeSinceLastAction() > actionDuration);
-    }
 }
