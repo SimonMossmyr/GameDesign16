@@ -16,12 +16,12 @@ public class ObstacleBehaviour : NetworkBehaviour {
         durabilityLeft = durability;
 
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (!isServer)
 			return;
-		
+
         // Restore obstacle durability if not touched for a while
         durabilityLeft += Time.deltaTime * 0.3f;
         if(durabilityLeft>durability)

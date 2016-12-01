@@ -63,13 +63,16 @@ public class InventoryWindow : MonoBehaviour {
 
     int bombCombination = 0;
 
-
+    //how many material 
+    int cratedMaterial1, cratedMaterial2, cratedMaterial3;
     //inventory of the player
     List<Material> items;
 
     InventoryManager inventoryOfThePlayer;
 
     void Start () {
+
+        cratedMaterial1 = cratedMaterial2 = cratedMaterial3 = 0;
 
         //initialize the list
         items = new List<Material>();
@@ -153,29 +156,35 @@ public class InventoryWindow : MonoBehaviour {
         {
             // [4] is for numpad 4. And should be for player 2. Rest goes with the same logic.
             if( Input.GetKeyDown("[4]") && mat1 > 0 && playerNumber == 2
-                || Input.GetKeyDown("4") && mat1 > 0 && playerNumber == 1)
+                || Input.GetKeyDown("4") && mat1 > 0 && playerNumber == 1
+                && mat1 > 0)
             {
                 //slot 1 is activated
                 fillSlots(slot1Sprite);
                 //remove the inventory from the inventory list
                 mat1--;
                 bombCombination += 1;
+                cratedMaterial1++;
             }
 
             if(Input.GetKeyDown("[5]") && mat2 > 0 && playerNumber == 2
-                || Input.GetKeyDown("5") && mat2 > 0 && playerNumber == 1)
+                || Input.GetKeyDown("5") && mat2 > 0 && playerNumber == 1
+                && mat2 > 0)
             {
                 fillSlots(slot2Sprite);
                 mat2--;
                 bombCombination += 2;
+                cratedMaterial2++;
             }
 
             if (Input.GetKeyDown("[6]") && mat3 > 0 && playerNumber == 2
-                || Input.GetKeyDown("6") && mat3 > 0 && playerNumber == 1)
+                || Input.GetKeyDown("6") && mat3 > 0 && playerNumber == 1
+                && mat3 > 0)
             {
                 fillSlots(slot3Sprite);
                 mat3--;
                 bombCombination += 3;
+                cratedMaterial3++;
             }
             //update the text in the canvas
             material1Text.text = mat1 + "";
@@ -186,26 +195,29 @@ public class InventoryWindow : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.KeypadEnter) && playerNumber == 2
                 || Input.GetKeyDown(KeyCode.Return) && playerNumber == 1)
             {
+                //slots are empty
+                isSlotOneFilled = false;
+                isSlotThreeFilled = false;
+                isSlotTwoFilled = false;
+                //replace with default empty slot sprite
+                slot1.sprite = emptySlotSprite;
+                slot2.sprite = emptySlotSprite;
+                slot3.sprite = emptySlotSprite;
 
-                if( bombCombination == 1 || bombCombination == 3 || bombCombination == 6)
-                {
-                    //slots are empty
-                    isSlotOneFilled = false;
-                    isSlotThreeFilled = false;
-                    isSlotTwoFilled = false;
-                    //replace with default empty slot sprite
-                    slot1.sprite = emptySlotSprite;
-                    slot2.sprite = emptySlotSprite;
-                    slot3.sprite = emptySlotSprite;
+                inventoryOfThePlayer.setMaterial3Count(mat3);
+                inventoryOfThePlayer.setMaterial2Count(mat2);
+                inventoryOfThePlayer.setMaterial1Count(mat1);
 
-                    inventoryOfThePlayer.setMaterial3Count(mat3);
-                    inventoryOfThePlayer.setMaterial2Count(mat2);
-                    inventoryOfThePlayer.setMaterial1Count(mat1);
+                //Debug.Log("asdasd: " + cratedMaterial1 + " -- " + cratedMaterial2 + "- -- " + cratedMaterial3);
 
-                    BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
-                    playerBombWindow.fillBombs(bombCombination);
-                    bombCombination = 0;
-                }
+                BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
+                playerBombWindow.calculateBombEffect(cratedMaterial1, cratedMaterial2, cratedMaterial3);
+
+                bombCombination = 0;
+
+                cratedMaterial1 = 0;
+                cratedMaterial2 = 0;
+                cratedMaterial3 = 0;
             }
         }
 	}
