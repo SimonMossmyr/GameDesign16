@@ -20,36 +20,44 @@ public class CameraBehaviour : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		// Current local player position
-		Vector2 minPos = new Vector2(9999, 9999);
-		Vector2 maxPos = new Vector2(-9999, -9999);
+    // Update is called once per frame
+    void Update()
+    {
+        // Current local player position
+        Vector2 minPos = new Vector2(9999, 9999);
+        Vector2 maxPos = new Vector2(-9999, -9999);
 		Vector3 avgPlayerPos = new Vector3();
-		foreach (GameObject player in players)
-		{
-			Vector3 playerPos = player.transform.position;
-			avgPlayerPos += playerPos;
 
-			if (playerPos.x > maxPos.x)
-			{
-				maxPos.x = playerPos.x;
-			}
-			if (playerPos.y > maxPos.y)
-			{
-				maxPos.y = playerPos.y;
-			}
-			if (playerPos.x < minPos.x)
-			{
-				minPos.x = playerPos.x;
-			}
-			if (playerPos.y < minPos.y)
-			{
-				minPos.y = playerPos.y;
-			}
-		}
-		avgPlayerPos = avgPlayerPos / players.Count;
+		// New players could have joined
+		players = GameObject.FindGameObjectsWithTag ("Player");
+
+        foreach (GameObject player in players)
+        {
+            Vector3 playerPos = player.transform.position;
+            avgPlayerPos += playerPos;
+
+            if (playerPos.x > maxPos.x)
+            {
+                maxPos.x = playerPos.x;
+            }
+            if (playerPos.y > maxPos.y)
+            {
+                maxPos.y = playerPos.y;
+            }
+            if (playerPos.x < minPos.x)
+            {
+                minPos.x = playerPos.x;
+            }
+            if (playerPos.y < minPos.y)
+            {
+                minPos.y = playerPos.y;
+            }
+        }
+
+		if (players.Length == 0)
+			return;
+
+        avgPlayerPos = avgPlayerPos / players.Length;
 
 		// Zoom camera through orthographic size for 2D
 		float newOrthographicSize = Mathf.Sqrt((maxPos - minPos).sqrMagnitude) / 1.8f;
@@ -63,7 +71,7 @@ public class CameraBehaviour : MonoBehaviour {
 		}
 		c.orthographicSize = newOrthographicSize;
 
-		// Limit camera to within playfield 
+		// Limit camera to within playfield
 		float xlimit = c.aspect;
 		float ylimit = 1f;
 		float cameraScale = (defaultSize - c.orthographicSize);
