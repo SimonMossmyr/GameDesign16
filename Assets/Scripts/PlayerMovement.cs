@@ -2,17 +2,20 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+public enum Dir { West, North, East, South };
+
 public class PlayerMovement : NetworkBehaviour {
+
+	[SyncVar]
+	public Dir dir;
 
     public float speed;
 	private Rigidbody2D rb2d;
 
-    private bool isFacingEast;
-    private bool isFacingNorth;
-
     // Use this for initialization
     void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		dir = Dir.South;
 	}
 	
 	// FixedUpdate is called once per physics frame
@@ -28,54 +31,40 @@ public class PlayerMovement : NetworkBehaviour {
 
 		float movementX = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
 		float movementY = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
-		float rotation = 0;
 
 		if(movementX > 0.0001)
         {
-            isFacingEast = true;
-            isFacingNorth = false;
-			rotation = 0;
+			dir = Dir.East;
         }
         else if (movementX < -0.0001)
         {
-            isFacingEast = false;
-            isFacingNorth = false;
-			rotation = 180;
+			dir = Dir.West;
         }
 
         if (movementY > 0.0001)
         {
-            isFacingNorth = true;
-			isFacingEast = false;
-			rotation = 270;
+			dir = Dir.North;
         }
         else if (movementY < -0.0001)
         {
-            isFacingNorth = false;
-			isFacingEast = false;
-			rotation = 90;
+			dir = Dir.South;
         }
+
+		CmdFace (dir);
 
         /*
 		 * Execute movement
 		 */
         Vector2 movement = new Vector2 (movementX, movementY);
-		Debug.Log (rotation);
-		rb2d.MoveRotation (rotation);
 		rb2d.MovePosition (rb2d.position + movement);
     }
+
+	[Command]
+	void CmdFace(Dir dir) {
+		this.dir = dir;
+	}
 
 	public void AddSpeed(float amount) {
 		speed += amount;
 	}
-
-    public bool getIsFacingEast()
-    {
-        return isFacingEast;
-    }
-
-    public bool getIsFacingNorth()
-    {
-        return isFacingNorth;
-    }
 }

@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013495318184}
   - 61: {fileID: 61000010287366216}
-  - 114: {fileID: 114000012267441268}
   - 114: {fileID: 114000012396790730}
-  m_Layer: 0
+  - 114: {fileID: 114000011717219102}
+  - 114: {fileID: 114000013672563092}
+  m_Layer: 9
   m_Name: Source1
   m_TagString: Obstacles
   m_Icon: {fileID: 0}
@@ -38,7 +39,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011832934610}
   - 212: {fileID: 212000011907306910}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ObstacleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +54,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011696841654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ObstacleGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,8 +94,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010887916438}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -115,7 +116,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &114000012267441268
+--- !u!114 &114000011717219102
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -123,12 +124,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010887916438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3249f644589d0aa458f9ad6440fbaf4f, type: 3}
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.1
-  durability: 3
-  numOfplayers: 2
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 14
+    i1: 94
+    i2: 94
+    i3: 93
+    i4: 245
+    i5: 14
+    i6: 117
+    i7: 100
+    i8: 73
+    i9: 50
+    i10: 23
+    i11: 67
+    i12: 33
+    i13: 29
+    i14: 107
+    i15: 162
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114000012396790730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +161,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialToSpawn: {fileID: 1000010503273178, guid: d43f322df457d7849815d166d4f8bdde,
     type: 2}
+--- !u!114 &114000013672563092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010887916438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3249f644589d0aa458f9ad6440fbaf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.1
+  durability: 3
+  durabilityLeft: 0
 --- !u!212 &212000011907306910
 SpriteRenderer:
   m_ObjectHideFlags: 1
