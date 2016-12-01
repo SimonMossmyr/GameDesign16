@@ -20,7 +20,11 @@ public class CameraBehaviour : MonoBehaviour {
         // Current local player position
         Vector2 minPos = new Vector2(9999, 9999);
         Vector2 maxPos = new Vector2(-9999, -9999);
-        Vector3 avgPlayerPos = new Vector3();
+		Vector3 avgPlayerPos = new Vector3();
+
+		// New players could have joined
+		players = GameObject.FindGameObjectsWithTag ("Player");
+
         foreach (GameObject player in players)
         {
             Vector3 playerPos = player.transform.position;
@@ -43,6 +47,10 @@ public class CameraBehaviour : MonoBehaviour {
                 minPos.y = playerPos.y;
             }
         }
+
+		if (players.Length == 0)
+			return;
+
         avgPlayerPos = avgPlayerPos / players.Length;
 
         // Zoom camera through orthographic size for 2D
