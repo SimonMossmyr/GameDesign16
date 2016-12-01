@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CameraBehaviour : MonoBehaviour {
 
-	public GameObject[] players;
+	private ArrayList players;
+	// public GameObject[] players;
 	private Camera c;
-    private float defaultSize = 5f;
-    public float minSize = 2f;
+	private float defaultSize = 5f;
+	public float minSize = 2f;
 
 	// Use this for initialization
 	void Start () {
 		c = GetComponent<Camera> ();
-        defaultSize = c.orthographicSize;
+		defaultSize = c.orthographicSize;
+		players = new ArrayList ();
+		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
+			players.Add (player);
+		}
 	}
 
     // Update is called once per frame
@@ -53,40 +59,48 @@ public class CameraBehaviour : MonoBehaviour {
 
         avgPlayerPos = avgPlayerPos / players.Length;
 
-        // Zoom camera through orthographic size for 2D
-        float newOrthographicSize = Mathf.Sqrt((maxPos - minPos).sqrMagnitude) / 1.8f;
-        if (newOrthographicSize > defaultSize)
-        {
-            newOrthographicSize = defaultSize;
-        }
-        else if (newOrthographicSize < minSize)
-        {
-            newOrthographicSize = minSize;
-        }
-        c.orthographicSize = newOrthographicSize;
+		// Zoom camera through orthographic size for 2D
+		float newOrthographicSize = Mathf.Sqrt((maxPos - minPos).sqrMagnitude) / 1.8f;
+		if (newOrthographicSize > defaultSize)
+		{
+			newOrthographicSize = defaultSize;
+		}
+		else if (newOrthographicSize < minSize)
+		{
+			newOrthographicSize = minSize;
+		}
+		c.orthographicSize = newOrthographicSize;
 
-        // Limit camera to within playfield 
-        float xlimit = c.aspect;
-        float ylimit = 1f;
-        float cameraScale = (defaultSize - c.orthographicSize);
-        if (avgPlayerPos.x > cameraScale * xlimit)
-        {
-            avgPlayerPos.x = cameraScale * xlimit;
-        }
-        else if (avgPlayerPos.x < -cameraScale * xlimit)
-        {
-            avgPlayerPos.x = -cameraScale * xlimit;
-        }
-        if (avgPlayerPos.y > cameraScale * ylimit)
-        {
-            avgPlayerPos.y = cameraScale * ylimit;
-        }
-        else if (avgPlayerPos.y < -cameraScale * ylimit)
-        {
-            avgPlayerPos.y = -cameraScale * ylimit;
-        }
+		// Limit camera to within playfield
+		float xlimit = c.aspect;
+		float ylimit = 1f;
+		float cameraScale = (defaultSize - c.orthographicSize);
+		if (avgPlayerPos.x > cameraScale * xlimit)
+		{
+			avgPlayerPos.x = cameraScale * xlimit;
+		}
+		else if (avgPlayerPos.x < -cameraScale * xlimit)
+		{
+			avgPlayerPos.x = -cameraScale * xlimit;
+		}
+		if (avgPlayerPos.y > cameraScale * ylimit)
+		{
+			avgPlayerPos.y = cameraScale * ylimit;
+		}
+		else if (avgPlayerPos.y < -cameraScale * ylimit)
+		{
+			avgPlayerPos.y = -cameraScale * ylimit;
+		}
 
-        // Move camera to average player pos
-        transform.position = new Vector3(avgPlayerPos.x, avgPlayerPos.y, -10);
-    }
+		// Move camera to average player pos
+		transform.position = new Vector3(avgPlayerPos.x, avgPlayerPos.y, -10);
+	}
+
+	public void AddPlayer(GameObject player) {
+		players.Add (player);
+	}
+
+	public void RemovePlayer(GameObject player) {
+		players.Remove (player);
+	}
 }
