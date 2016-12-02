@@ -1,10 +1,18 @@
 fileFormatVersion: 2
 guid: e771bb6190cee2644a63a4348c93ef88
-timeCreated: 1479323096
+timeCreated: 1480697481
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerBombInventoryCanvas: {instanceID: 0}
+  - player: {instanceID: 0}
+  - emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  - slot1BombSprite: {fileID: 21300000, guid: 0354b5aa0b9dd6c4fa20c29a9861ba4a, type: 3}
+  - slot2BombSprite: {instanceID: 0}
+  - slot3BombSprite: {instanceID: 0}
+  - bombStandart: {fileID: 1000011089451324, guid: 2bdbab48a4474224b868a4a257c3eebb,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
