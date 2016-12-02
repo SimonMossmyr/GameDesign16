@@ -32,8 +32,8 @@ public class PlayerMovement : NetworkBehaviour {
         /*
 		 * Calculate directional movement.
 		 */
-        float rawAxisX = Input.GetAxisRaw("Horizontal-P" + playerNumber);
-        float rawAxisY = Input.GetAxisRaw("Vertical-P" + playerNumber);
+        float rawAxisX = Input.GetAxisRaw("Horizontal");
+        float rawAxisY = Input.GetAxisRaw("Vertical" );
 
         float movementX = rawAxisX * Time.deltaTime * speed;
 		float movementY = rawAxisY * Time.deltaTime * speed;

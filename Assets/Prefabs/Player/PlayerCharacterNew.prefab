@@ -122,7 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f324f92d0dcba45bd59d28eae06c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNumber: 0
   HealthPoints: 100
+  actionDuration: 0.5
+  Lives: 0
+  PlayerBase: {fileID: 0}
 --- !u!114 &114000011557029882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,19 +138,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e771bb6190cee2644a63a4348c93ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBombInventoryCanvas: {fileID: 0}
+  playerBombInventoryCanvas: {fileID: 223000011597928494, guid: a0aa28028809f2a4d93c93ed404b5bb1,
+    type: 2}
   player: {fileID: 1000012134778640}
-  playerNumber: 1
   emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   slot1BombSprite: {fileID: 21300000, guid: 0354b5aa0b9dd6c4fa20c29a9861ba4a, type: 3}
   slot2BombSprite: {fileID: 21300000, guid: dd25e7259d284f9408d8237331b137de, type: 3}
   slot3BombSprite: {fileID: 21300000, guid: 19745b3e93b1f774bac436b893d52337, type: 3}
-  slot1: {fileID: 0}
-  slot2: {fileID: 0}
-  slot3: {fileID: 0}
-  bombDamage: {fileID: 1000011089451324, guid: ae66ed26995f84f4fb461670cdafc71a, type: 2}
-  bombHeal: {fileID: 1000011089451324, guid: 5451d8c201cb03844a8b3de8cba78661, type: 2}
-  bombSlow: {fileID: 1000011089451324, guid: c94eb4d4c7d711847b6ddcdf7f07a6e9, type: 2}
+  bombStandart: {fileID: 1000011089451324, guid: 2bdbab48a4474224b868a4a257c3eebb,
+    type: 2}
 --- !u!114 &114000011822849504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5cd5aa5f62b8a4f9bd841d91e57d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasObject: {fileID: 223000012454761044, guid: 9737fe17053e51a44862d7e5a2fd9ab8,
+    type: 2}
   material1Text: {fileID: 0}
   material2Text: {fileID: 0}
   material3Text: {fileID: 0}
@@ -179,7 +181,6 @@ MonoBehaviour:
   slot2Sprite: {fileID: 21300000, guid: b0ce33b9ed39483438d0b6905bef485b, type: 3}
   slot3Sprite: {fileID: 21300000, guid: 302c67e7f227079489ae534584af9b10, type: 3}
   emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  playerNumber: 1
 --- !u!114 &114000012583155008
 MonoBehaviour:
   m_ObjectHideFlags: 1

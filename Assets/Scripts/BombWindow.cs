@@ -14,7 +14,6 @@ public class BombWindow : MonoBehaviour {
     GameObject player;
 
     //player 1 or player 2. Needed to figure out which keypad values to listen
-    [SerializeField]
     int playerNumber = 1;
 
     //to see which slots are filled
@@ -35,11 +34,9 @@ public class BombWindow : MonoBehaviour {
     Sprite slot3BombSprite;
 
     //empty bomb slots that will be filled
-    [SerializeField]
+
     Image slot1; // damage
-    [SerializeField]
     Image slot2; // heal
-    [SerializeField]
     Image slot3; // slow
 
     [SerializeField]
@@ -84,7 +81,32 @@ public class BombWindow : MonoBehaviour {
 
         // comes from the old demo. We add all the bombs to player 2. Delete this if you want player 2 to craft materials
 
-	}
+
+        Image[] bombSlotCanvas = playerBombInventoryCanvas.GetComponentsInChildren<Image>();
+
+        foreach (Image go in bombSlotCanvas)
+        {
+            Debug.Log(go.name);
+
+            if ( go.name == "BombSlot1Image" )
+            {
+                slot1 = go;
+            }
+            else if( go.name == "BombSlot2Image" )
+            {
+                slot2 = go;
+            }
+            else if( go.name == "BombSlot3Image")
+            {
+                slot3 = go;
+            }
+        }
+
+
+        PlayerStats curPlayer = gameObject.GetComponent<PlayerStats>();
+        playerNumber = curPlayer.PlayerNumber;
+
+    }
 	
     public void calculateBombEffect(int mat1, int mat2, int mat3)
     {
