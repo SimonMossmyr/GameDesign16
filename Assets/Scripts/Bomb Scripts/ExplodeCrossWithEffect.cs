@@ -54,6 +54,8 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 			CreateParticleEffect ((Vector2)transform.position + delta);
 		}
 
+		BombBehaviour explosionBehaviour = gameObject.GetComponent<BombBehaviour> ();
+		explosionBehaviour.checkCollison ();
 		Destroy (gameObject);
 	}
 

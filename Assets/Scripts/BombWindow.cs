@@ -14,7 +14,6 @@ public class BombWindow : MonoBehaviour {
     GameObject player;
 
     //player 1 or player 2. Needed to figure out which keypad values to listen
-    [SerializeField]
     int playerNumber = 1;
 
     //to see which slots are filled
@@ -35,11 +34,9 @@ public class BombWindow : MonoBehaviour {
     Sprite slot3BombSprite;
 
     //empty bomb slots that will be filled
-    [SerializeField]
+
     Image slot1; // damage
-    [SerializeField]
     Image slot2; // heal
-    [SerializeField]
     Image slot3; // slow
 
     [SerializeField]
@@ -49,48 +46,67 @@ public class BombWindow : MonoBehaviour {
 
     int []bombslotId = new int[3];
     int[] bombAttributes = new int[3];
-    int[,] bombSlotAttr = new int[3,3];
+    float[,] bombSlotAttr = new float[3,3];
 
     int mat1Number, mat2Number, mat3Number;
 
     GameObject createdBomb;
     BombBehaviour defaultBombBeh;
 
+    //we do this so that we can easily access to the material attributes
     Material material1 = new Material();
-
     Material materialtype2 = new Material();
-
     Material materialtype3 = new Material();
 
     // Use this for initialization
     void Start () {
 
-        material1.setDamage(5);
-        material1.setEffect(6);
-        material1.setRange(10);
+        // se the attributes here 
+        material1.setDamage(0.5f);
+        material1.setEffect(0.6f);
+        material1.setRange(1);
 
-        materialtype2.setDamage(2);
-        materialtype2.setEffect(5);
-        materialtype2.setRange(1);
+        materialtype2.setDamage(0.2f);
+        materialtype2.setEffect(0.5f);
+        materialtype2.setRange(0.2f);
 
-        materialtype3.setDamage(4);
-        materialtype3.setEffect(7);
-        materialtype3.setRange(2);
+        materialtype3.setDamage(0.4f);
+        materialtype3.setEffect(0.7f);
+        materialtype3.setRange(0.3f);
 
+        // we put the number of materials used for bomb crafted. See the "returnMaterial" method for how it happens
         bombslotId[0] = 0;
         bombslotId[1] = 0;
         bombslotId[2] = 0;
 
-        if (playerNumber == 2)
-        {
-            isFirstSlotFilled = isSecondSlotFilled = isThirdFilled = true;
-            slot1.sprite = slot1BombSprite; // damage
-            slot2.sprite = slot2BombSprite; // heal 
-            slot3.sprite = slot3BombSprite; // slow
+        // comes from the old demo. We add all the bombs to player 2. Delete this if you want player 2 to craft materials
 
+
+        Image[] bombSlotCanvas = playerBombInventoryCanvas.GetComponentsInChildren<Image>();
+
+        foreach (Image go in bombSlotCanvas)
+        {
+            Debug.Log(go.name);
+
+            if ( go.name == "BombSlot1Image" )
+            {
+                slot1 = go;
+            }
+            else if( go.name == "BombSlot2Image" )
+            {
+                slot2 = go;
+            }
+            else if( go.name == "BombSlot3Image")
+            {
+                slot3 = go;
+            }
         }
 
-	}
+
+        PlayerStats curPlayer = gameObject.GetComponent<PlayerStats>();
+        playerNumber = curPlayer.PlayerNumber;
+
+    }
 	
     public void calculateBombEffect(int mat1, int mat2, int mat3)
     {
@@ -98,18 +114,19 @@ public class BombWindow : MonoBehaviour {
         mat2Number = mat2;
         mat3Number = mat3;
 
+        //encode the value to keep the materials used for bombs
         int bombMaterialCount = (100 * mat1) + (10 * mat2) + mat3;
-
-        //Debug.Log("Combine this: " + bombMaterialCount);
-
+        
         if (!isFirstSlotFilled)
         {
+            //set the sprite of the bomb slot
             slot1.sprite = slot1BombSprite;
             //set the flag to true to know if it has a bomb
             isFirstSlotFilled = true;
-
+            //add the number of material used to the array
             bombslotId[0] = bombMaterialCount;
 
+            //calculate the effects of the materials. Mat1, mat2, mat3 are the number of material1 ,2 etc.
             bombSlotAttr[0, 0] = mat1 * material1.getDamage() + mat2 * materialtype2.getDamage() + mat3 * materialtype3.getDamage();
             bombSlotAttr[0, 1] = mat1 * material1.getEffect() + mat2 * materialtype2.getEffect() + mat3 * materialtype3.getEffect();
             bombSlotAttr[0, 2] = mat1 * material1.getRange() + mat2 * materialtype2.getRange() + mat3 * materialtype3.getRange();
@@ -139,20 +156,19 @@ public class BombWindow : MonoBehaviour {
         }
     }
 
+    // slot is: which bomb slot is used
     void returnMaterials(int slot)
     {
 
         int totalMatCount = bombslotId[slot];
-
+        //decode the values for the bombs
         int mat1RetCount = totalMatCount / 100;
         int mat2RetCount = totalMatCount % 100 / 10;
         int mat3RetCount = totalMatCount % 10;
-        
-        /*
-        Debug.Log("total material used: " + totalMatCount);
-        Debug.Log("mats: " + mat1RetCount + " --- " + mat2RetCount + " --- " + mat3RetCount);
-        */
-        
+
+        // return the materials to the inventory. I wrote another method 
+        // because otherwise I would have to use a for loop here and get the current count
+        // from the script and set them new each time 
         gameObject.GetComponent<InventoryManager>().returnMaterial1(mat1RetCount);
         gameObject.GetComponent<InventoryManager>().returnMaterial2(mat2RetCount);
         gameObject.GetComponent<InventoryManager>().returnMaterial3(mat3RetCount);
@@ -174,16 +190,19 @@ public class BombWindow : MonoBehaviour {
         {
             if ( isFirstSlotFilled)
             {
-
+                // create an instance of the standart bomb and add the range, effect and damage attributes to it
                 GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh = asd.GetComponent<BombBehaviour>();
                 defaultBombBeh.setDamage(bombSlotAttr[0, 0]);
                 defaultBombBeh.setRange(bombSlotAttr[0, 1]);
                 defaultBombBeh.setEffect(bombSlotAttr[0, 2]);
 
+                //set the sprite to empty 
                 slot1.sprite = emptySlotSprite;
+                //set the slot empty
                 isFirstSlotFilled = false;
-
+                // this is for which slot is called. 
+                // so here i am saying: first slot is empty, return the material from the first slot
                 returnMaterials(0);
 
             }
@@ -194,7 +213,7 @@ public class BombWindow : MonoBehaviour {
             if (isSecondSlotFilled)
             {
                 GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh = asd.GetComponent<BombBehaviour>();
                 defaultBombBeh.setDamage(bombSlotAttr[1, 0]);
                 defaultBombBeh.setRange(bombSlotAttr[1, 1]);
                 defaultBombBeh.setEffect(bombSlotAttr[1, 2]);
@@ -211,7 +230,7 @@ public class BombWindow : MonoBehaviour {
             if (isThirdFilled)
             {
                 GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.AddComponent<BombBehaviour>();
+                defaultBombBeh = asd.GetComponent<BombBehaviour>();
                 defaultBombBeh.setDamage(bombSlotAttr[2, 0]);
                 defaultBombBeh.setRange(bombSlotAttr[2, 1]);
                 defaultBombBeh.setEffect(bombSlotAttr[2, 2]);

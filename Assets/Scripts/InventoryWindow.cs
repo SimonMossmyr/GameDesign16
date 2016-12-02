@@ -13,22 +13,23 @@ public class InventoryWindow : MonoBehaviour {
 
     // Use this for initialization
     //inventory canvas
+    [SerializeField]
     Canvas CanvasObject;
 
     // text field for displaying the number of material each player has
-    [SerializeField]
+   
     private Text material1Text;
-    [SerializeField]
+   
     private Text material2Text;
-    [SerializeField]
+   
     private Text material3Text;
 
     //material slot when the player presses the keys to craft a bomb
-    [SerializeField]
+
     Image slot1;
-    [SerializeField]
+    
     Image slot2;
-    [SerializeField]
+    
     Image slot3;
 
     //sprites for replacing the empty material slot when the key is pressed
@@ -45,7 +46,6 @@ public class InventoryWindow : MonoBehaviour {
     Sprite emptySlotSprite;
     
     // player 1 or player 2. So we know if we should use canvas 1 or canvas 2
-    [SerializeField]
     int playerNumber;
 
     //player 1 inventory canvas or player 2 inventory canvas
@@ -72,15 +72,57 @@ public class InventoryWindow : MonoBehaviour {
 
     void Start () {
 
+        PlayerStats curPlayer = gameObject.GetComponent<PlayerStats>();
+        playerNumber = curPlayer.PlayerNumber;
+
         cratedMaterial1 = cratedMaterial2 = cratedMaterial3 = 0;
 
         //initialize the list
         items = new List<Material>();
 
         //decide which canvas to activate. Uses the tags. Tags are important
-        canvasTagName = "Player1Corner";
-		Debug.Log (GameObject.FindGameObjectWithTag("Player1Inventory"));
-        CanvasObject = GameObject.FindGameObjectWithTag("Player1Inventory").GetComponent<Canvas>();
+        canvasTagName = "Player" + playerNumber + "Corner";
+
+        Text[] bombSlotCanvas = CanvasObject.GetComponentsInChildren<Text>();
+
+        foreach (Text go in bombSlotCanvas)
+        {
+            Debug.Log(go.name);
+
+            if (go.name == "BombSlot1Image")
+            {
+                material1Text = go;
+            }
+            else if (go.name == "BombSlot2Image")
+            {
+                material2Text = go;
+            }
+            else if (go.name == "BombSlot3Image")
+            {
+                material3Text = go;
+            }
+        }
+
+        Image[] imageSlotImages = CanvasObject.GetComponentsInChildren<Image>();
+
+        foreach (Image go in imageSlotImages)
+        {
+            Debug.Log(go.name);
+
+            if (go.name == "Player2Slot1")
+            {
+                slot1 = go;
+            }
+            else if (go.name == "Player2Slot2")
+            {
+                slot2 = go;
+            }
+            else if (go.name == "Player2Slot3")
+            {
+                slot3 = go;
+            }
+        }
+
 
         //deactivate because we do not want it to be shown initially
         CanvasObject.enabled = false;
@@ -123,6 +165,7 @@ public class InventoryWindow : MonoBehaviour {
         }
     }
 
+    // for updating the sprites
     void fillSlots(Sprite materialSprite)
     {
         if( !isSlotOneFilled)
@@ -200,14 +243,13 @@ public class InventoryWindow : MonoBehaviour {
                 inventoryOfThePlayer.setMaterial3Count(mat3);
                 inventoryOfThePlayer.setMaterial2Count(mat2);
                 inventoryOfThePlayer.setMaterial1Count(mat1);
-
-                //Debug.Log("asdasd: " + cratedMaterial1 + " -- " + cratedMaterial2 + "- -- " + cratedMaterial3);
+                
 
                 BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
                 playerBombWindow.calculateBombEffect(cratedMaterial1, cratedMaterial2, cratedMaterial3);
 
                 bombCombination = 0;
-
+                //keeps track of how many materials are used. 
                 cratedMaterial1 = 0;
                 cratedMaterial2 = 0;
                 cratedMaterial3 = 0;
