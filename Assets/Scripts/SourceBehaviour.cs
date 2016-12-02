@@ -7,16 +7,15 @@ public class SourceBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
 	}
 
-    void OnDestroy()
-    {
-        Instantiate(materialToSpawn, transform.position, Quaternion.identity);
-    }
+	// Update is called once per frame
+	void Update () {
+
+	}
+
+  public void DestroySource() {
+    Instantiate(materialToSpawn, transform.position, Quaternion.identity);
+  }
 }
