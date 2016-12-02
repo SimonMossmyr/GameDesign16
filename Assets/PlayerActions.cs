@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerActions : MonoBehaviour {
+public class PlayerActions : NetworkBehaviour {
 
     private PlayerStats playerStats;
     private PlayerMovement movement;
@@ -16,7 +17,9 @@ public class PlayerActions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Pick axe-P" + playerStats.PlayerNumber))
+		if (!isLocalPlayer)
+			return;
+        if (Input.GetButtonDown("Pick axe"))
         {
             if (movement.getFacingDirection() == 0)
                 animator.Play("MiningEast");

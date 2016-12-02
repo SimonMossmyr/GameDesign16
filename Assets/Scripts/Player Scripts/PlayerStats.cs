@@ -36,8 +36,6 @@ public class PlayerStats : MonoBehaviour {
 
 		if (Lives <= 0) {
 			// Lives should never be less than 0, but still
-			GameObject camera = GameObject.FindGameObjectWithTag ("MainCamera");
-			camera.GetComponent<CameraBehaviour> ().RemovePlayer (gameObject); // remove player from the camera system
 			Destroy (gameObject);
 		} else {
 			print ("Moving player "+gameObject+" to "+PlayerBase.transform.position);

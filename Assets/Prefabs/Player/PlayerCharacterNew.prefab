@@ -27,6 +27,7 @@ GameObject:
   - 114: {fileID: 114000012286602838}
   - 114: {fileID: 114000012583155008}
   - 114: {fileID: 114000011557029882}
+  - 114: {fileID: 114000010228376178}
   m_Layer: 0
   m_Name: PlayerCharacterNew
   m_TagString: Player
@@ -78,6 +79,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!114 &114000010228376178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012134778640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 249
+    i1: 107
+    i2: 89
+    i3: 232
+    i4: 118
+    i5: 175
+    i6: 42
+    i7: 244
+    i8: 154
+    i9: 202
+    i10: 57
+    i11: 103
+    i12: 100
+    i13: 56
+    i14: 254
+    i15: 246
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114000010637221678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,9 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f324f92d0dcba45bd59d28eae06c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 0
   HealthPoints: 100
-  actionDuration: 0.5
 --- !u!114 &114000011557029882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,4 +202,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be3819d7350af2a4385611b0eb952145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dir: 0
   speed: 3
