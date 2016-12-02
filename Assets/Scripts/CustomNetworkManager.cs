@@ -17,7 +17,7 @@ public class CustomNetworkManager : NetworkManager {
 	}
 
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
-		var player = (GameObject)GameObject.Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+		var player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 		player.GetComponent<PlayerStats> ().PlayerNumber = playerIndex;
 		playerIndex++;
     NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
