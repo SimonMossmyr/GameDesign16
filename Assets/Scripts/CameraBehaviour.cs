@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class CameraBehaviour : MonoBehaviour {
 
-	private ArrayList players;
-	// public GameObject[] players;
+	private GameObject[] players;
 	private Camera c;
 	private float defaultSize = 5f;
 	public float minSize = 2f;
@@ -14,10 +13,6 @@ public class CameraBehaviour : MonoBehaviour {
 	void Start () {
 		c = GetComponent<Camera> ();
 		defaultSize = c.orthographicSize;
-		players = new ArrayList ();
-		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
-			players.Add (player);
-		}
 	}
 
     // Update is called once per frame
@@ -94,13 +89,5 @@ public class CameraBehaviour : MonoBehaviour {
 
 		// Move camera to average player pos
 		transform.position = new Vector3(avgPlayerPos.x, avgPlayerPos.y, -10);
-	}
-
-	public void AddPlayer(GameObject player) {
-		players.Add (player);
-	}
-
-	public void RemovePlayer(GameObject player) {
-		players.Remove (player);
 	}
 }

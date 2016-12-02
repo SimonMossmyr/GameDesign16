@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestScenes/Offline Scene 1.unity
+    path: Assets/Scenes/TestingScene/Offline Scene 1.unity
   - enabled: 1
-    path: Assets/Scenes/TestScenes/MainScene 1.unity
+    path: Assets/Scenes/TestingScene/MainScene 1.unity

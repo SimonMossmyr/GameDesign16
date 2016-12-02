@@ -26,13 +26,13 @@ public class MiningBehaviour : NetworkBehaviour
 	public void CmdMine() {
 		Vector2 direction = Vector2.down;
 
-		if (pm.dir == Dir.West) {
+		if (pm.getFacingDirection() == 4) {
 			direction = Vector2.left;
-		} else if (pm.dir == Dir.North) {
+		} else if (pm.getFacingDirection() == 2) {
 			direction = Vector2.up;
-		} else if (pm.dir == Dir.East) {
+		} else if (pm.getFacingDirection() == 0) {
 			direction = Vector2.right;
-		} else if (pm.dir == Dir.South) {
+		} else if (pm.getFacingDirection() == 6) {
 			direction = Vector2.down;
 		}
 

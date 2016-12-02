@@ -78,16 +78,9 @@ public class InventoryWindow : MonoBehaviour {
         items = new List<Material>();
 
         //decide which canvas to activate. Uses the tags. Tags are important
-        if (playerNumber == 1)
-        {
-            canvasTagName = "Player1Corner";
-            CanvasObject = GameObject.FindGameObjectWithTag("Player1Inventory").GetComponent<Canvas>();
-        }
-        else
-        {
-            canvasTagName = "Player2Corner";
-            CanvasObject = GameObject.FindGameObjectWithTag("Player2Inventory").GetComponent<Canvas>();
-        }
+        canvasTagName = "Player1Corner";
+		Debug.Log (GameObject.FindGameObjectWithTag("Player1Inventory"));
+        CanvasObject = GameObject.FindGameObjectWithTag("Player1Inventory").GetComponent<Canvas>();
 
         //deactivate because we do not want it to be shown initially
         CanvasObject.enabled = false;
