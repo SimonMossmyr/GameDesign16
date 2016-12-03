@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		PlayerBase = GameObject.Find ("Player" + PlayerNumber + "Base");
 	}
 
 	// Update is called once per frame
