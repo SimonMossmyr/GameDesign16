@@ -8,8 +8,11 @@ public class PlayerMovement : NetworkBehaviour {
 	private Rigidbody2D rb2d;
 	private int playerNumber;
 
-	[SyncVar]
+	[SyncVar(hook = "DirHook")]
     private int facingDirection = 6;
+
+	[SyncVar(hook = "MovingHook")]
+	private bool moving = false;
 
     private float deadZone = 0.1f;
     private SpriteAnimator animator;
@@ -24,6 +27,9 @@ public class PlayerMovement : NetworkBehaviour {
 	
 	// FixedUpdate is called once per physics frame
 	void FixedUpdate () {
+
+		UpdateAnimation ();
+
 		if (!isLocalPlayer)
 		{
 			return;
@@ -38,57 +44,39 @@ public class PlayerMovement : NetworkBehaviour {
         float movementX = rawAxisX * Time.deltaTime * speed;
 		float movementY = rawAxisY * Time.deltaTime * speed;
 
-		int newDir = 6;
+		int newDir = facingDirection;
 
         // Update facing direction
         if(rawAxisX == 0 && rawAxisY == 0)
         {
-            if (animator.currentAnimation.name == "WalkingEast")
-            {
-                animator.Play("IdleEast");
-            }
-            else if (animator.currentAnimation.name == "WalkingNorth")
-            {
-                animator.Play("IdleNorth");
-            }
-            else if (animator.currentAnimation.name == "WalkingWest")
-            {
-                animator.Play("IdleWest");
-            }
-            else if (animator.currentAnimation.name == "WalkingSouth")
-            {
-                animator.Play("IdleSouth");
-            }
+			CmdChangeDir (newDir, false);
+			this.moving = false;
         }
         else
         {
             if (rawAxisX > deadZone && rawAxisY == 0)
             {
 				newDir = 0;
-                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-                    animator.Play("WalkingEast");
             }
             else if (rawAxisY > deadZone && rawAxisX == 0)
             {
 				newDir = 2;
-                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-                    animator.Play("WalkingNorth");
             }
             else if (rawAxisX < deadZone && rawAxisY == 0)
             {
 				newDir = 4;
-                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-                    animator.Play("WalkingWest");
             }
             else if (rawAxisY < deadZone && rawAxisX == 0)
             {
 				newDir = 6;
-                if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-                    animator.Play("WalkingSouth");
-            }
+			}
 
-			CmdChangeDir (newDir);
-        }
+			if (newDir != facingDirection || !moving) {
+				CmdChangeDir (newDir, true);
+				this.moving = true;
+				this.facingDirection = newDir;
+			}
+		}
 
         /*
 		 * Execute movement
@@ -97,9 +85,55 @@ public class PlayerMovement : NetworkBehaviour {
 		rb2d.MovePosition (rb2d.position + movement);
     }
 
+	public void UpdateAnimation() {
+		if (moving) {
+			Debug.Log ("Derp" + facingDirection);
+			switch (facingDirection) {
+			case 0:
+				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+					animator.Play ("WalkingEast");
+				break;
+			case 2:
+				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+					animator.Play ("WalkingNorth");
+				break;
+			case 4:
+				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+					animator.Play ("WalkingWest");
+				break;
+			case 6:
+				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
+					animator.Play ("WalkingSouth");
+				break;
+			}
+		} else {
+			switch (facingDirection) {
+			case 0:
+				animator.Play("IdleEast");
+				break;
+			case 2:
+				animator.Play("IdleNorth");
+				break;
+			case 4:
+				animator.Play("IdleWest");
+				break;
+			case 6:
+				animator.Play("IdleSouth");
+				break;
+			}
+		}
+	}
+
+	public void DirHook(int dir) {
+	}
+
+	public void MovingHook(bool moving) {
+	}
+
 	[Command]
-	void CmdChangeDir(int dir) {
+	void CmdChangeDir(int dir, bool moving) {
 		this.facingDirection = dir;
+		this.moving = moving;
 	}
 
 	public void AddSpeed(float amount) {
