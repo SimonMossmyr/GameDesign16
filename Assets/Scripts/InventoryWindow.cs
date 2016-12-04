@@ -72,6 +72,8 @@ public class InventoryWindow : MonoBehaviour {
 
     void Start () {
 
+        CanvasObject = (Canvas)Instantiate(CanvasObject, transform.position,transform.rotation);
+
         PlayerStats curPlayer = gameObject.GetComponent<PlayerStats>();
         playerNumber = curPlayer.PlayerNumber;
 
@@ -87,17 +89,16 @@ public class InventoryWindow : MonoBehaviour {
 
         foreach (Text go in bombSlotCanvas)
         {
-            Debug.Log(go.name);
-
-            if (go.name == "BombSlot1Image")
+            //Debug.Log("INVENTORY WINDOW TEXT: " + go.name);
+            if (go.name == "Player2Material1Number")
             {
                 material1Text = go;
             }
-            else if (go.name == "BombSlot2Image")
+            else if (go.name == "Player2Material2Number")
             {
                 material2Text = go;
             }
-            else if (go.name == "BombSlot3Image")
+            else if (go.name == "Player2Material3Number")
             {
                 material3Text = go;
             }
@@ -107,7 +108,6 @@ public class InventoryWindow : MonoBehaviour {
 
         foreach (Image go in imageSlotImages)
         {
-            Debug.Log(go.name);
 
             if (go.name == "Player2Slot1")
             {
@@ -122,7 +122,6 @@ public class InventoryWindow : MonoBehaviour {
                 slot3 = go;
             }
         }
-
 
         //deactivate because we do not want it to be shown initially
         CanvasObject.enabled = false;
@@ -154,7 +153,7 @@ public class InventoryWindow : MonoBehaviour {
     void OnTriggerExit2D(Collider2D other)
     {
         //if the player exits the canvas, deactivate the canvas
-        if (other.gameObject.tag == "Player1Corner" || other.gameObject.tag == "Player2Corner")
+        if (other.gameObject.tag == canvasTagName)
         {
             CanvasObject.enabled = false;
             //set to 0 because we are re calculating them when the player enters to the area
@@ -191,9 +190,7 @@ public class InventoryWindow : MonoBehaviour {
 	    if( CanvasObject.isActiveAndEnabled )
         {
             // [4] is for numpad 4. And should be for player 2. Rest goes with the same logic.
-            if( Input.GetKeyDown("[4]") && mat1 > 0 && playerNumber == 2
-                || Input.GetKeyDown("4") && mat1 > 0 && playerNumber == 1
-                && mat1 > 0)
+            if(Input.GetKeyDown("4") && mat1 > 0 )
             {
                 //slot 1 is activated
                 fillSlots(slot1Sprite);
@@ -203,9 +200,7 @@ public class InventoryWindow : MonoBehaviour {
                 cratedMaterial1++;
             }
 
-            if(Input.GetKeyDown("[5]") && mat2 > 0 && playerNumber == 2
-                || Input.GetKeyDown("5") && mat2 > 0 && playerNumber == 1
-                && mat2 > 0)
+            if(Input.GetKeyDown("5") && mat2 > 0 )
             {
                 fillSlots(slot2Sprite);
                 mat2--;
@@ -213,9 +208,7 @@ public class InventoryWindow : MonoBehaviour {
                 cratedMaterial2++;
             }
 
-            if (Input.GetKeyDown("[6]") && mat3 > 0 && playerNumber == 2
-                || Input.GetKeyDown("6") && mat3 > 0 && playerNumber == 1
-                && mat3 > 0)
+            if (Input.GetKeyDown("6") && mat3 > 0 )
             {
                 fillSlots(slot3Sprite);
                 mat3--;
@@ -228,8 +221,7 @@ public class InventoryWindow : MonoBehaviour {
             material3Text.text = mat3 + "";
 
             //if the enter key is pressed, we should craft the bombs and shit
-            if(Input.GetKeyDown(KeyCode.KeypadEnter) && playerNumber == 2
-                || Input.GetKeyDown(KeyCode.Return) && playerNumber == 1)
+            if(Input.GetKeyDown(KeyCode.Return) )
             {
                 //slots are empty
                 isSlotOneFilled = false;
