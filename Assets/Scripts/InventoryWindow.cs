@@ -83,7 +83,7 @@ public class InventoryWindow : MonoBehaviour {
         items = new List<Material>();
 
         //decide which canvas to activate. Uses the tags. Tags are important
-        canvasTagName = "Player" + playerNumber + "Corner";
+        canvasTagName = "Player" + playerNumber + "Base";
 
         Text[] bombSlotCanvas = CanvasObject.GetComponentsInChildren<Text>();
 
@@ -130,7 +130,7 @@ public class InventoryWindow : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //if the player entered to it's area
-        if (other.gameObject.tag == canvasTagName)
+        if (other.gameObject.name == canvasTagName)
         {
             //enable the canvas
             CanvasObject.enabled = true;
@@ -153,7 +153,7 @@ public class InventoryWindow : MonoBehaviour {
     void OnTriggerExit2D(Collider2D other)
     {
         //if the player exits the canvas, deactivate the canvas
-        if (other.gameObject.tag == canvasTagName)
+        if (other.gameObject.name == canvasTagName)
         {
             CanvasObject.enabled = false;
             //set to 0 because we are re calculating them when the player enters to the area
