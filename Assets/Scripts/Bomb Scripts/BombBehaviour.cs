@@ -23,11 +23,11 @@ public class BombBehaviour : MonoBehaviour {
 
 	public void checkCollison(){
 
-		Collider2D[] explosion = Physics2D.OverlapCircleAll (transform.position, range);
+        Collider2D[] explosion = Physics2D.OverlapCircleAll (transform.position, range);
 		foreach (Collider2D i in explosion) {
 			if (i.gameObject.tag == "Player") {
                 Debug.Log("Damage inflicted: " + damage);
-				i.gameObject.GetComponent<PlayerStats> ().AddHealth(-damage);
+                i.gameObject.GetComponent<PlayerStats> ().AddHealth(-damage);
 			}
 		}
 			
