@@ -61,6 +61,8 @@ public class BombWindow : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        playerBombInventoryCanvas = (Canvas)Instantiate(playerBombInventoryCanvas, transform.position, transform.rotation);
+
         // se the attributes here 
         material1.setDamage(0.5f);
         material1.setEffect(0.6f);
@@ -80,13 +82,11 @@ public class BombWindow : MonoBehaviour {
         bombslotId[2] = 0;
 
         // comes from the old demo. We add all the bombs to player 2. Delete this if you want player 2 to craft materials
-
-
         Image[] bombSlotCanvas = playerBombInventoryCanvas.GetComponentsInChildren<Image>();
 
         foreach (Image go in bombSlotCanvas)
         {
-            Debug.Log(go.name);
+            //Debug.Log(go.name);
 
             if ( go.name == "BombSlot1Image" )
             {
@@ -174,6 +174,17 @@ public class BombWindow : MonoBehaviour {
         gameObject.GetComponent<InventoryManager>().returnMaterial3(mat3RetCount);
     }
 
+    GameObject createStandartBomb(GameObject bombPrefab, int slotID)
+    {
+
+        GameObject defaultBomb = (GameObject)Instantiate(bombPrefab, transform.position, transform.rotation);
+        defaultBombBeh = defaultBomb.GetComponent<BombBehaviour>();
+        defaultBombBeh.setDamage(bombSlotAttr[slotID, 0]);
+        defaultBombBeh.setRange(bombSlotAttr[slotID, 1]);
+        defaultBombBeh.setEffect(bombSlotAttr[slotID, 2]);
+        return defaultBomb;
+    }
+
 	// Update is called once per frame
 	void Update () {
         
@@ -185,18 +196,12 @@ public class BombWindow : MonoBehaviour {
         //give the position to the canvas position
         playerBombInventoryCanvas.transform.position = pos;
 
-        if ( playerNumber == 2 && Input.GetKeyDown("[1]")
-            || playerNumber == 1 && Input.GetKeyDown("1"))
+        if ( Input.GetKeyDown("1"))
         {
             if ( isFirstSlotFilled)
             {
                 // create an instance of the standart bomb and add the range, effect and damage attributes to it
-                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.GetComponent<BombBehaviour>();
-                defaultBombBeh.setDamage(bombSlotAttr[0, 0]);
-                defaultBombBeh.setRange(bombSlotAttr[0, 1]);
-                defaultBombBeh.setEffect(bombSlotAttr[0, 2]);
-
+                createStandartBomb(bombStandart, 0);
                 //set the sprite to empty 
                 slot1.sprite = emptySlotSprite;
                 //set the slot empty
@@ -207,16 +212,11 @@ public class BombWindow : MonoBehaviour {
 
             }
         }
-        if (playerNumber == 2 && Input.GetKeyDown("[2]")
-            || playerNumber == 1 && Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("2"))
         {
             if (isSecondSlotFilled)
             {
-                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.GetComponent<BombBehaviour>();
-                defaultBombBeh.setDamage(bombSlotAttr[1, 0]);
-                defaultBombBeh.setRange(bombSlotAttr[1, 1]);
-                defaultBombBeh.setEffect(bombSlotAttr[1, 2]);
+                createStandartBomb(bombStandart, 1);
 
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
@@ -224,16 +224,11 @@ public class BombWindow : MonoBehaviour {
                 returnMaterials(1);
             }
         }
-        if (playerNumber == 2 && Input.GetKeyDown("[3]")
-            || playerNumber == 1 && Input.GetKeyDown("3"))
+        if (Input.GetKeyDown("3"))
         {
             if (isThirdFilled)
             {
-                GameObject asd = (GameObject)Instantiate(bombStandart, player.transform.position, Quaternion.identity);
-                defaultBombBeh = asd.GetComponent<BombBehaviour>();
-                defaultBombBeh.setDamage(bombSlotAttr[2, 0]);
-                defaultBombBeh.setRange(bombSlotAttr[2, 1]);
-                defaultBombBeh.setEffect(bombSlotAttr[2, 2]);
+                createStandartBomb(bombStandart, 2);
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
