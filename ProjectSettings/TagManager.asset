@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Material
+  - Player0Corner
   - Player1Corner
-  - Player2Corner
+  - Player0Inventory
   - Player1Inventory
-  - Player2Inventory
   - InventoryCanvas
   - Obstacles
   layers:
