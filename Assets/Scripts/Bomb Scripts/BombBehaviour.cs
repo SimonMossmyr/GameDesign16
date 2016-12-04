@@ -57,9 +57,15 @@ public class BombBehaviour : MonoBehaviour {
     {
         range = val;
     }
-
-	// Update is called once per frame
-	void Update () {
-        Debug.Log(damage + " --- " + effect + " ---  " + range);
-	}
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, range*2);
+    }
+    // Update is called once per frame
+    void Update () {
+        //Gizmos.DrawSphere(transform.position, range);
+        
+        //Debug.Log(damage + " --- " + effect + " ---  " + range);
+    }
 }

@@ -66,11 +66,13 @@ public class InventoryWindow : MonoBehaviour {
     //how many material 
     int cratedMaterial1, cratedMaterial2, cratedMaterial3;
     //inventory of the player
-    List<Material> items;
-
     InventoryManager inventoryOfThePlayer;
 
+    int numberOfBombsCreated;
+
     void Start () {
+
+        numberOfBombsCreated = 0;
 
         CanvasObject = (Canvas)Instantiate(CanvasObject, transform.position,transform.rotation);
 
@@ -79,8 +81,6 @@ public class InventoryWindow : MonoBehaviour {
 
         cratedMaterial1 = cratedMaterial2 = cratedMaterial3 = 0;
 
-        //initialize the list
-        items = new List<Material>();
 
         //decide which canvas to activate. Uses the tags. Tags are important
         canvasTagName = "Player" + playerNumber + "Base";
@@ -135,7 +135,6 @@ public class InventoryWindow : MonoBehaviour {
             //enable the canvas
             CanvasObject.enabled = true;
             //get the player inventory
-            items = gameObject.GetComponent<InventoryManager>().getInventoryList();
             inventoryOfThePlayer = gameObject.GetComponent<InventoryManager>();
 
 
@@ -184,6 +183,11 @@ public class InventoryWindow : MonoBehaviour {
         }
     }
 
+    public void decrementNumberOfCraftedBombs()
+    {
+        numberOfBombsCreated--;
+    }
+
     // Update is called once per frame
     void Update () {
         //if the canvas is active. We do this because we are listening to keyboad events
@@ -223,28 +227,33 @@ public class InventoryWindow : MonoBehaviour {
             //if the enter key is pressed, we should craft the bombs and shit
             if(Input.GetKeyDown(KeyCode.Return) )
             {
-                //slots are empty
-                isSlotOneFilled = false;
-                isSlotThreeFilled = false;
-                isSlotTwoFilled = false;
-                //replace with default empty slot sprite
-                slot1.sprite = emptySlotSprite;
-                slot2.sprite = emptySlotSprite;
-                slot3.sprite = emptySlotSprite;
+                if ( numberOfBombsCreated <= 2 && isSlotOneFilled || isSlotTwoFilled || isSlotThreeFilled )
+                {
+                    //slots are empty
+                    isSlotOneFilled = false;
+                    isSlotThreeFilled = false;
+                    isSlotTwoFilled = false;
+                    //replace with default empty slot sprite
+                    slot1.sprite = emptySlotSprite;
+                    slot2.sprite = emptySlotSprite;
+                    slot3.sprite = emptySlotSprite;
 
-                inventoryOfThePlayer.setMaterial3Count(mat3);
-                inventoryOfThePlayer.setMaterial2Count(mat2);
-                inventoryOfThePlayer.setMaterial1Count(mat1);
-                
+                    inventoryOfThePlayer.setMaterial3Count(mat3);
+                    inventoryOfThePlayer.setMaterial2Count(mat2);
+                    inventoryOfThePlayer.setMaterial1Count(mat1);
 
-                BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
-                playerBombWindow.calculateBombEffect(cratedMaterial1, cratedMaterial2, cratedMaterial3);
 
-                bombCombination = 0;
-                //keeps track of how many materials are used. 
-                cratedMaterial1 = 0;
-                cratedMaterial2 = 0;
-                cratedMaterial3 = 0;
+                    BombWindow playerBombWindow = gameObject.GetComponent<BombWindow>();
+                    playerBombWindow.calculateBombEffect(cratedMaterial1, cratedMaterial2, cratedMaterial3);
+
+                    bombCombination = 0;
+                    //keeps track of how many materials are used. 
+                    cratedMaterial1 = 0;
+                    cratedMaterial2 = 0;
+                    cratedMaterial3 = 0;
+
+                    numberOfBombsCreated++;
+                }
             }
         }
 	}
