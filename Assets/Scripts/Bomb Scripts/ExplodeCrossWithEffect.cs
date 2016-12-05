@@ -39,28 +39,31 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
         for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(i*radius, 0f);
 			CreateParticleEffect ((Vector2)transform.position + delta);
+            bombStats.checkCollison((Vector2)transform.position + delta);
 		}
 
 		// Explosions north
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(0f, i* radius);
 			CreateParticleEffect ((Vector2)transform.position + delta);
-		}
+            bombStats.checkCollison((Vector2)transform.position + delta);
+        }
 
 		// Explosions west
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(-i* radius, 0f);
 			CreateParticleEffect ((Vector2)transform.position + delta);
-		}
+            bombStats.checkCollison((Vector2)transform.position + delta);
+        }
 
 		// Explosions south
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(0f, -i* radius);
 			CreateParticleEffect ((Vector2)transform.position + delta);
-		}
+            bombStats.checkCollison((Vector2)transform.position + delta);
+        }
 
-		BombBehaviour explosionBehaviour = gameObject.GetComponent<BombBehaviour> ();
-		explosionBehaviour.checkCollison ();
+        
 		Destroy (gameObject);
 	}
 
