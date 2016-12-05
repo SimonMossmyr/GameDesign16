@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SourceBehaviour : MonoBehaviour {
+public class SourceBehaviour : NetworkBehaviour {
 
     public GameObject materialToSpawn;
 
@@ -15,7 +16,10 @@ public class SourceBehaviour : MonoBehaviour {
 
 	}
 
-  public void DestroySource() {
-    Instantiate(materialToSpawn, transform.position, Quaternion.identity);
-  }
+	[Command]
+	public void CmdDestroySource() {
+		var material = (GameObject) Instantiate(materialToSpawn, transform.position, Quaternion.identity);
+
+		NetworkServer.Spawn (material);
+	}
 }
