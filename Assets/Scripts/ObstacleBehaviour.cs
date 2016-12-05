@@ -33,15 +33,13 @@ public class ObstacleBehaviour : NetworkBehaviour {
   private void DestroyObstacle() {
     SourceBehaviour tmp = gameObject.GetComponent<SourceBehaviour> ();
     if (tmp != null) {
-      tmp.DestroySource();
+      tmp.CmdDestroySource();
     }
     Destroy(gameObject);
   }
 
 	public void TakeHit() {
 		durabilityLeft--;
-
-		Debug.Log (durabilityLeft);
 
 		// Destroy fully damaged obstacles
 		if (durabilityLeft < 1)
