@@ -32,4 +32,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+build/*
 *.exe

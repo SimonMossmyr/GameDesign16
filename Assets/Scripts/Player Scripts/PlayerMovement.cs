@@ -92,7 +92,6 @@ public class PlayerMovement : NetworkBehaviour {
         if (animator.currentAnimation.name != "MiningEast" && animator.currentAnimation.name != "MiningNorth" && animator.currentAnimation.name != "MiningWest" && animator.currentAnimation.name != "MiningSouth")
         {
             if (moving) {
-			    Debug.Log ("Derp" + facingDirection);
 			    switch (facingDirection) {
 			    case 0:
 				    animator.Play ("WalkingEast");

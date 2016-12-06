@@ -282,7 +282,7 @@ GameObject:
   - 114: {fileID: 114000010727083844}
   - 114: {fileID: 114000013303124074}
   m_Layer: 5
-  m_Name: PlayerInventoryCanvas1 1
+  m_Name: PlayerInventoryCanvas
   m_TagString: Player2Inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

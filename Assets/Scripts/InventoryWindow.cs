@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 /*
     Class for handling the canvas drawing. 
@@ -9,7 +10,7 @@ using UnityEngine.UI;
     There are two canvas in the scene. 1 for each player. Reason for this is beacuse I was not able to figure out how to use one canvas and 
     populate with different values for different players. This needs to be fixed.
 */
-public class InventoryWindow : MonoBehaviour {
+public class InventoryWindow : NetworkBehaviour {
 
     // Use this for initialization
     //inventory canvas
@@ -71,6 +72,9 @@ public class InventoryWindow : MonoBehaviour {
     int numberOfBombsCreated;
 
     void Start () {
+
+		if (!isLocalPlayer)
+			return;
 
         numberOfBombsCreated = 0;
 
