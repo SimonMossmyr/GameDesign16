@@ -23,13 +23,13 @@ public class MiningBehaviour : NetworkBehaviour
             if( Time.realtimeSinceStartup > lastActionTime + actionDuration)
             {
                 CmdMine();
+				lastActionTime = Time.realtimeSinceStartup;
             }
 		}
 	}
 
 	[Command]
 	public void CmdMine() {
-        lastActionTime = Time.realtimeSinceStartup;
 
 		Vector2 direction = Vector2.down;
 
