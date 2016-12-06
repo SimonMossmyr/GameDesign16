@@ -74,7 +74,11 @@ public class InventoryWindow : MonoBehaviour {
 
         numberOfBombsCreated = 0;
 
-        CanvasObject = (Canvas)Instantiate(CanvasObject, transform.position,transform.rotation);
+        Vector2 initializePosition = transform.position; 
+        initializePosition.x =  transform.position.x * 0.55f;
+        
+
+        CanvasObject = (Canvas)Instantiate(CanvasObject, initializePosition,transform.rotation);
 
         PlayerStats curPlayer = gameObject.GetComponent<PlayerStats>();
         playerNumber = curPlayer.PlayerNumber;
@@ -89,7 +93,6 @@ public class InventoryWindow : MonoBehaviour {
 
         foreach (Text go in bombSlotCanvas)
         {
-            //Debug.Log("INVENTORY WINDOW TEXT: " + go.name);
             if (go.name == "Player2Material1Number")
             {
                 material1Text = go;
