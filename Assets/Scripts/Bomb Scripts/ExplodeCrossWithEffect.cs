@@ -23,7 +23,15 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 		}
 	}
 
-	private void Explode() {
+    // call this function inside the for loop, then it will draw spheres in the effect place of the bombs
+    // use this to see if the player was supposed to be damaged. 
+    void bombEffectDebugging(Vector2 delta)
+    {
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        cube.transform.position = (Vector2)transform.position + delta;
+    }
+
+    private void Explode() {
 
 		Vector2 delta;
 
@@ -40,7 +48,7 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 			delta = new Vector2(i*radius, 0f);
 			CreateParticleEffect ((Vector2)transform.position + delta);
             bombStats.checkCollison((Vector2)transform.position + delta);
-		}
+        }
 
 		// Explosions north
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
@@ -62,8 +70,6 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 			CreateParticleEffect ((Vector2)transform.position + delta);
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
-
-        
 		Destroy (gameObject);
 	}
 
