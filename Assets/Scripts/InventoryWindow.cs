@@ -71,6 +71,8 @@ public class InventoryWindow : NetworkBehaviour {
 
     int numberOfBombsCreated;
 
+    public AudioSource makeBombSound;
+
     void Start () {
 
 		if (!isLocalPlayer)
@@ -236,6 +238,9 @@ public class InventoryWindow : NetworkBehaviour {
             {
                 if ( numberOfBombsCreated <= 2 && isSlotOneFilled || isSlotTwoFilled || isSlotThreeFilled )
                 {
+                    // play sound
+                    makeBombSound.Play();
+
                     //slots are empty
                     isSlotOneFilled = false;
                     isSlotThreeFilled = false;

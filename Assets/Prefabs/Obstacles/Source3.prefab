@@ -143,6 +143,7 @@ MonoBehaviour:
   radius: 1.1
   durability: 3
   durabilityLeft: 0
+  destructionSound: {fileID: 8300000, guid: d4ac63dbc18cc8548b57365f1b2f3450, type: 3}
 --- !u!114 &114000014042429754
 MonoBehaviour:
   m_ObjectHideFlags: 1

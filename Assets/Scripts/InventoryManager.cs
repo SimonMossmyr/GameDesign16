@@ -17,6 +17,9 @@ public class InventoryManager : MonoBehaviour {
     int playerNumber;
 
     int material1Count, material2Count, material3Count;
+
+    // material sound
+    public AudioSource collectionSound;
     
     // Use this for initialization
     void Start () {
@@ -121,13 +124,15 @@ public class InventoryManager : MonoBehaviour {
 
         if ( other.gameObject.tag == "Material")
         {
+            collectionSound.Play();
+
             Material collidedMaterial = other.gameObject.GetComponent<Material>();
 
             if (collidedMaterial.getMaterialType() == Material.MaterialType.Material1)
                 material1Count++;
             else if (collidedMaterial.getMaterialType() == Material.MaterialType.Material2)
                 material2Count++;
-            else
+            else if (collidedMaterial.getMaterialType() == Material.MaterialType.Material3)
                 material3Count++;
 
             itemsInInventory.Add(other.gameObject.GetComponent<Material>());

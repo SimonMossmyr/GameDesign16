@@ -11,6 +11,8 @@ public class ObstacleBehaviour : NetworkBehaviour {
 	[SyncVar]
     public float durabilityLeft;
 
+    public AudioClip destructionSound;
+
 	// Use this for initialization
 	void Start () {
         durabilityLeft = durability;
@@ -31,6 +33,8 @@ public class ObstacleBehaviour : NetworkBehaviour {
 	}
 
   private void DestroyObstacle() {
+    AudioSource.PlayClipAtPoint(destructionSound,transform.position);
+
     SourceBehaviour tmp = gameObject.GetComponent<SourceBehaviour> ();
     if (tmp != null) {
       tmp.CmdDestroySource();
