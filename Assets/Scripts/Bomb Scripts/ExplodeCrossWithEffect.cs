@@ -33,12 +33,13 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 
     private void Explode() {
 
-		Vector2 delta;
+        BombBehaviour bombStats = gameObject.GetComponent<BombBehaviour>();
+
+        Vector2 delta;
 
 		// Explosion centered at the bomb
-		CreateParticleEffect(transform.position);
+		CreateParticleEffect(transform.position, bombStats.getEffect());
 
-        BombBehaviour bombStats = gameObject.GetComponent<BombBehaviour>();
 
         float radius = bombStats.getRange();
         //radius = radius*2;
@@ -46,35 +47,65 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
         // Explosions east
         for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(i*radius, 0f);
-			CreateParticleEffect ((Vector2)transform.position + delta);
+			CreateParticleEffect ((Vector2)transform.position + delta, bombStats.getEffect());
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
 
 		// Explosions north
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(0f, i* radius);
-			CreateParticleEffect ((Vector2)transform.position + delta);
+			CreateParticleEffect ((Vector2)transform.position + delta, bombStats.getEffect());
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
 
 		// Explosions west
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(-i* radius, 0f);
-			CreateParticleEffect ((Vector2)transform.position + delta);
+			CreateParticleEffect ((Vector2)transform.position + delta, bombStats.getEffect());
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
 
 		// Explosions south
 		for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(0f, -i* radius);
-			CreateParticleEffect ((Vector2)transform.position + delta);
+			CreateParticleEffect ((Vector2)transform.position + delta, bombStats.getEffect());
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
 		Destroy (gameObject);
 	}
 
-	private void CreateParticleEffect(Vector2 position) {
+    private void CreateParticleEffect(Vector2 position, float bombEffect) {
 		GameObject explosion = Instantiate (ExplosionEffect);
 		explosion.transform.position = position;
-	}
+
+        ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
+
+        Debug.Log("Bomb effect: " + bombEffect);
+         
+        Color explosionColor = Color.cyan;
+        if (bombEffect % 5 == 0)
+        {
+            explosionColor = Color.blue;
+        }
+        else if (bombEffect % 7 == 0)
+        {
+            explosionColor = Color.magenta;
+        }
+        else if (bombEffect % 13 == 0)
+        {
+            explosionColor = Color.green;
+        }
+        else
+        {
+
+        }
+
+        //Color generatedColor = new Color(scaledValue * 0.1f, scaledValue* 0.1f, scaledValue* 0.1f);
+        //Color  psColor = Color.Lerp(firstColor, firstColor, Time.deltaTime / 5);
+        ps.startColor = explosionColor;
+
+    }
 }
+/*
+
+*/
