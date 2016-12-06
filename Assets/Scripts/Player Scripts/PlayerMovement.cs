@@ -28,8 +28,6 @@ public class PlayerMovement : NetworkBehaviour {
 	// FixedUpdate is called once per physics frame
 	void FixedUpdate () {
 
-		UpdateAnimation ();
-
 		if (!isLocalPlayer)
 		{
 			return;
@@ -85,44 +83,48 @@ public class PlayerMovement : NetworkBehaviour {
 		rb2d.MovePosition (rb2d.position + movement);
     }
 
+    public void Update()
+    {
+        UpdateAnimation();
+    }
+
 	public void UpdateAnimation() {
-		if (moving) {
-			Debug.Log ("Derp" + facingDirection);
-			switch (facingDirection) {
-			case 0:
-				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-					animator.Play ("WalkingEast");
-				break;
-			case 2:
-				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-					animator.Play ("WalkingNorth");
-				break;
-			case 4:
-				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-					animator.Play ("WalkingWest");
-				break;
-			case 6:
-				if (animator.currentAnimation.name == "IdleEast" || animator.currentAnimation.name == "IdleNorth" || animator.currentAnimation.name == "IdleWest" || animator.currentAnimation.name == "IdleSouth")
-					animator.Play ("WalkingSouth");
-				break;
-			}
-		} else {
-			switch (facingDirection) {
-			case 0:
-				animator.Play("IdleEast");
-				break;
-			case 2:
-				animator.Play("IdleNorth");
-				break;
-			case 4:
-				animator.Play("IdleWest");
-				break;
-			case 6:
-				animator.Play("IdleSouth");
-				break;
-			}
-		}
-	}
+        if (animator.currentAnimation.name != "MiningEast" && animator.currentAnimation.name != "MiningNorth" && animator.currentAnimation.name != "MiningWest" && animator.currentAnimation.name != "MiningSouth")
+        {
+            if (moving) {
+			    Debug.Log ("Derp" + facingDirection);
+			    switch (facingDirection) {
+			    case 0:
+				    animator.Play ("WalkingEast");
+				    break;
+			    case 2:
+				    animator.Play ("WalkingNorth");
+				    break;
+			    case 4:
+				    animator.Play ("WalkingWest");
+				    break;
+			    case 6:
+				    animator.Play ("WalkingSouth");
+				    break;
+			    }
+		    } else {
+			    switch (facingDirection) {
+			    case 0:
+				    animator.Play("IdleEast");
+				    break;
+			    case 2:
+				    animator.Play("IdleNorth");
+				    break;
+			    case 4:
+				    animator.Play("IdleWest");
+				    break;
+			    case 6:
+				    animator.Play("IdleSouth");
+				    break;
+			    }
+		    }
+        }
+    }
 
 	public void DirHook(int dir) {
 	}
