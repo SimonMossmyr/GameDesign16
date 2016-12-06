@@ -15,6 +15,8 @@ public class PlayerStats : NetworkBehaviour {
 	public int Lives;
 	public GameObject PlayerBase;
 
+    public AudioClip dieSound;
+
 	// Use this for initialization
 	void Start () {
 		PlayerBase = GameObject.Find ("Player" + PlayerNumber + "Base");
@@ -37,7 +39,9 @@ public class PlayerStats : NetworkBehaviour {
 	public void Kill() {
 		Lives--;
 
-		if (Lives <= 0) {
+        AudioSource.PlayClipAtPoint(dieSound, transform.position);
+
+        if (Lives <= 0) {
 			// Lives should never be less than 0, but still
 			Destroy (gameObject);
 		} else {
