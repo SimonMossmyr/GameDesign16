@@ -38,10 +38,10 @@ public class PlayerStats : MonoBehaviour {
 			// Lives should never be less than 0, but still
 			Destroy (gameObject);
 		} else {
-			print ("Moving player "+gameObject+" to "+PlayerBase.transform.position);
 			gameObject.GetComponent<Rigidbody2D> ().isKinematic = true;
 			gameObject.GetComponent<Rigidbody2D> ().position = PlayerBase.transform.position;
 			gameObject.GetComponent<Rigidbody2D> ().isKinematic = false;
+			HealthPoints = 100;
 		}
 	}
 
