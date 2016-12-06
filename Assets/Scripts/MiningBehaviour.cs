@@ -5,6 +5,8 @@ public class MiningBehaviour : NetworkBehaviour
 {
 	private Rigidbody2D playerRb2d;
 	private PlayerMovement pm;
+    private float lastActionTime;
+    public float actionDuration = 0.5f;
 
 	void Start()
 	{
@@ -17,13 +19,18 @@ public class MiningBehaviour : NetworkBehaviour
 		if (!isLocalPlayer)
 			return;
 		
-		if (Input.GetButtonDown ("Pick axe")) {
-			CmdMine ();
+		if (Input.GetButton ("Pick axe")) {
+            if( Time.realtimeSinceStartup > lastActionTime + actionDuration)
+            {
+                CmdMine();
+            }
 		}
 	}
 
 	[Command]
 	public void CmdMine() {
+        lastActionTime = Time.realtimeSinceStartup;
+
 		Vector2 direction = Vector2.down;
 
 		if (pm.getFacingDirection() == 4) {
