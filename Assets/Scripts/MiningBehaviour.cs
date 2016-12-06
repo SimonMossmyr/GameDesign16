@@ -8,6 +8,8 @@ public class MiningBehaviour : NetworkBehaviour
     private float lastActionTime;
     public float actionDuration = 0.5f;
 
+    public AudioSource miningHackSound;
+
 	void Start()
 	{
 		playerRb2d = gameObject.GetComponent<Rigidbody2D> ();
@@ -31,7 +33,9 @@ public class MiningBehaviour : NetworkBehaviour
 	[Command]
 	public void CmdMine() {
 
-		Vector2 direction = Vector2.down;
+        miningHackSound.Play();
+
+        Vector2 direction = Vector2.down;
 
 		if (pm.getFacingDirection() == 4) {
 			direction = Vector2.left;
