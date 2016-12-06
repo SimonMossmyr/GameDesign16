@@ -30,6 +30,7 @@ GameObject:
   - 114: {fileID: 114000011923929608}
   - 114: {fileID: 114000011584903334}
   - 114: {fileID: 114000013336483014}
+  - 82: {fileID: 82000013885133532}
   m_Layer: 0
   m_Name: PlayerCharacterNewWithGraphics
   m_TagString: Player
@@ -112,6 +113,80 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!82 &82000013885133532
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010467471280}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 13b741d0367521846ab22e124c92e6ee, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114000011584903334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03d86adb81ce40458388575000450d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionDuration: 0.5
 --- !u!114 &114000013399400190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,7 +415,7 @@ MonoBehaviour:
   slot1Sprite: {fileID: 21300000, guid: 40152d5c80bb79b49be81de56fb73f62, type: 3}
   slot2Sprite: {fileID: 21300000, guid: b0ce33b9ed39483438d0b6905bef485b, type: 3}
   slot3Sprite: {fileID: 21300000, guid: 302c67e7f227079489ae534584af9b10, type: 3}
-  emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  emptySlotSprite: {fileID: 21300000, guid: f402f92e5494d9b47b28bc61671dbac7, type: 3}
 --- !u!114 &114000013548469328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,7 +446,7 @@ MonoBehaviour:
   playerBombInventoryCanvas: {fileID: 223000011597928494, guid: a0aa28028809f2a4d93c93ed404b5bb1,
     type: 2}
   player: {fileID: 1000010467471280}
-  emptySlotSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  emptySlotSprite: {fileID: 21300000, guid: f402f92e5494d9b47b28bc61671dbac7, type: 3}
   slot1BombSprite: {fileID: 21300000, guid: 0354b5aa0b9dd6c4fa20c29a9861ba4a, type: 3}
   slot2BombSprite: {fileID: 21300000, guid: dd25e7259d284f9408d8237331b137de, type: 3}
   slot3BombSprite: {fileID: 21300000, guid: 19745b3e93b1f774bac436b893d52337, type: 3}

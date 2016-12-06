@@ -42,12 +42,12 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 
 
         float radius = bombStats.getRange();
-        //radius = radius*2;
         
         // Explosions east
         for (int i = 1; i <= NumberOfExplosionsInEachDirection; i++) {
 			delta = new Vector2(i*radius, 0f);
 			CreateParticleEffect ((Vector2)transform.position + delta, bombStats.getEffect());
+            //create circle and check player collisions
             bombStats.checkCollison((Vector2)transform.position + delta);
         }
 
@@ -79,8 +79,6 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
 		explosion.transform.position = position;
 
         ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
-
-        Debug.Log("Bomb effect: " + bombEffect);
          
         Color explosionColor = Color.cyan;
         if (bombEffect % 5 == 0)
@@ -95,17 +93,23 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
         {
             explosionColor = Color.green;
         }
+        else if ( bombEffect % (5+7) == 0)
+        {
+            explosionColor = Color.cyan;
+        }
+        else if ( bombEffect % (5+13) == 0)
+        {
+            explosionColor = Color.red;
+        } 
+        else if ( bombEffect % (7+13) == 0)
+        {
+            explosionColor = new Color(0.647059f, 0.164706f, 0.164706f);
+        }
         else
         {
-
+            explosionColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
         }
-
-        //Color generatedColor = new Color(scaledValue * 0.1f, scaledValue* 0.1f, scaledValue* 0.1f);
-        //Color  psColor = Color.Lerp(firstColor, firstColor, Time.deltaTime / 5);
         ps.startColor = explosionColor;
 
     }
 }
-/*
-
-*/
