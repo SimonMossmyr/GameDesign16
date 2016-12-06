@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : NetworkBehaviour {
 
+	[SyncVar]
 	[Range(0,1)]
 	public int PlayerNumber;
+
 	public float HealthPoints;
 	private float actionTime;
 	public float actionDuration = 0.5f;
