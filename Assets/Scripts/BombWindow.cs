@@ -66,15 +66,15 @@ public class BombWindow : MonoBehaviour {
         // set the attributes here 
         // minimum radius is 0.3f though this may be too little
         material1.setDamage(0.5f);
-        material1.setEffect(0.6f);
+        material1.setEffect(5);
         material1.setRange(0.3f);
 
         materialtype2.setDamage(0.2f);
-        materialtype2.setEffect(0.5f);
+        materialtype2.setEffect(7);
         materialtype2.setRange(0.4f);
 
         materialtype3.setDamage(0.4f);
-        materialtype3.setEffect(0.7f);
+        materialtype3.setEffect(13);
         materialtype3.setRange(0.5f);
 
         // we put the number of materials used for bomb crafted. See the "returnMaterial" method for how it happens
