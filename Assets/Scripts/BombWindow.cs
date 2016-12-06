@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class BombWindow : MonoBehaviour {
+public class BombWindow : NetworkBehaviour {
 
     //canvas of the player
     [SerializeField]
@@ -174,7 +175,8 @@ public class BombWindow : MonoBehaviour {
         gameObject.GetComponent<InventoryManager>().returnMaterial3(mat3RetCount);
     }
 
-    GameObject createStandartBomb(GameObject bombPrefab, int slotID)
+	[Command]
+    void CmdCreateStandardBomb(GameObject bombPrefab, int slotID)
     {
 
         GameObject defaultBomb = (GameObject)Instantiate(bombPrefab, transform.position, transform.rotation);
@@ -182,7 +184,8 @@ public class BombWindow : MonoBehaviour {
         defaultBombBeh.setDamage(bombSlotAttr[slotID, 0]);
         defaultBombBeh.setRange(bombSlotAttr[slotID, 1]);
         defaultBombBeh.setEffect(bombSlotAttr[slotID, 2]);
-        return defaultBomb;
+        
+		NetworkServer.Spawn (defaultBomb);
     }
 
 	// Update is called once per frame
@@ -201,7 +204,7 @@ public class BombWindow : MonoBehaviour {
             if ( isFirstSlotFilled)
             {
                 // create an instance of the standart bomb and add the range, effect and damage attributes to it
-                createStandartBomb(bombStandart, 0);
+				CmdCreateStandardBomb(bombStandart, 0);
                 //set the sprite to empty 
                 slot1.sprite = emptySlotSprite;
                 //set the slot empty
@@ -216,7 +219,7 @@ public class BombWindow : MonoBehaviour {
         {
             if (isSecondSlotFilled)
             {
-                createStandartBomb(bombStandart, 1);
+				CmdCreateStandardBomb(bombStandart, 1);
 
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
@@ -228,7 +231,7 @@ public class BombWindow : MonoBehaviour {
         {
             if (isThirdFilled)
             {
-                createStandartBomb(bombStandart, 2);
+				CmdCreateStandardBomb(bombStandart, 2);
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;

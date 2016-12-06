@@ -21,6 +21,8 @@ GameObject:
   - 4: {fileID: 4000014182441208}
   - 114: {fileID: 114000013415992438}
   - 114: {fileID: 114000011502899292}
+  - 114: {fileID: 114000012105889692}
+  - 114: {fileID: 114000013799039456}
   m_Layer: 0
   m_Name: BasicBomb
   m_TagString: Untagged
@@ -87,6 +89,38 @@ MonoBehaviour:
   ExplosionSpacing: 0.8
   ExplosionEffect: {fileID: 1000013063239222, guid: 843695ef5e6d39f458b99e399ccc09b1,
     type: 2}
+--- !u!114 &114000012105889692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011089451324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 43
+    i1: 219
+    i2: 171
+    i3: 72
+    i4: 164
+    i5: 71
+    i6: 66
+    i7: 36
+    i8: 184
+    i9: 104
+    i10: 164
+    i11: 162
+    i12: 87
+    i13: 195
+    i14: 238
+    i15: 187
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114000013415992438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,6 +135,26 @@ MonoBehaviour:
   damage: 0
   effect: 0
   range: 0
+--- !u!114 &114000013799039456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011089451324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212000013707742814
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,7 +182,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1276963471
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0354b5aa0b9dd6c4fa20c29a9861ba4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
