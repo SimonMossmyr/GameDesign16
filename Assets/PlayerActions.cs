@@ -19,7 +19,7 @@ public class PlayerActions : NetworkBehaviour {
 	void Update () {
 		if (!isLocalPlayer)
 			return;
-        if (Input.GetButtonDown("Pick axe"))
+        if (Input.GetButton("Pick axe"))
         {
             if (movement.getFacingDirection() == 0)
                 animator.Play("MiningEast");
