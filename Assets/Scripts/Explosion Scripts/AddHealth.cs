@@ -14,7 +14,7 @@ public class AddHealth: MonoBehaviour {
 
 		foreach (GameObject player in players) {
 			if (Vector2.Distance (transform.position, player.transform.position) <= Radius) {
-				player.GetComponent<PlayerStats> ().AddHealth (Amount);
+				//player.GetComponent<PlayerStats> ().AddHealth (Amount);
 			}
 		}
 

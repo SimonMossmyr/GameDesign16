@@ -63,18 +63,19 @@ public class BombWindow : MonoBehaviour {
 
         playerBombInventoryCanvas = (Canvas)Instantiate(playerBombInventoryCanvas, transform.position, transform.rotation);
 
-        // se the attributes here 
+        // set the attributes here 
+        // minimum radius is 0.3f though this may be too little
         material1.setDamage(0.5f);
-        material1.setEffect(0.6f);
-        material1.setRange(1);
+        material1.setEffect(5);
+        material1.setRange(0.3f);
 
         materialtype2.setDamage(0.2f);
-        materialtype2.setEffect(0.5f);
-        materialtype2.setRange(0.2f);
+        materialtype2.setEffect(7);
+        materialtype2.setRange(0.4f);
 
         materialtype3.setDamage(0.4f);
-        materialtype3.setEffect(0.7f);
-        materialtype3.setRange(0.3f);
+        materialtype3.setEffect(13);
+        materialtype3.setRange(0.5f);
 
         // we put the number of materials used for bomb crafted. See the "returnMaterial" method for how it happens
         bombslotId[0] = 0;
@@ -126,10 +127,14 @@ public class BombWindow : MonoBehaviour {
             //add the number of material used to the array
             bombslotId[0] = bombMaterialCount;
 
+            Debug.Log("Bomb slot ID: " + bombslotId[0]);
+
             //calculate the effects of the materials. Mat1, mat2, mat3 are the number of material1 ,2 etc.
             bombSlotAttr[0, 0] = mat1 * material1.getDamage() + mat2 * materialtype2.getDamage() + mat3 * materialtype3.getDamage();
             bombSlotAttr[0, 1] = mat1 * material1.getEffect() + mat2 * materialtype2.getEffect() + mat3 * materialtype3.getEffect();
             bombSlotAttr[0, 2] = mat1 * material1.getRange() + mat2 * materialtype2.getRange() + mat3 * materialtype3.getRange();
+
+
         } 
         //if not, add to second slot 
         else if (!isSecondSlotFilled)
@@ -180,8 +185,11 @@ public class BombWindow : MonoBehaviour {
         GameObject defaultBomb = (GameObject)Instantiate(bombPrefab, transform.position, transform.rotation);
         defaultBombBeh = defaultBomb.GetComponent<BombBehaviour>();
         defaultBombBeh.setDamage(bombSlotAttr[slotID, 0]);
-        defaultBombBeh.setRange(bombSlotAttr[slotID, 1]);
-        defaultBombBeh.setEffect(bombSlotAttr[slotID, 2]);
+        defaultBombBeh.setEffect(bombSlotAttr[slotID, 1]);
+        defaultBombBeh.setRange(bombSlotAttr[slotID, 2]);
+
+
+
         return defaultBomb;
     }
 
@@ -209,7 +217,7 @@ public class BombWindow : MonoBehaviour {
                 // this is for which slot is called. 
                 // so here i am saying: first slot is empty, return the material from the first slot
                 returnMaterials(0);
-
+                gameObject.GetComponent<InventoryWindow>().decrementNumberOfCraftedBombs();
             }
         }
         if (Input.GetKeyDown("2"))
@@ -222,6 +230,8 @@ public class BombWindow : MonoBehaviour {
                 isSecondSlotFilled = false;
                 
                 returnMaterials(1);
+
+                gameObject.GetComponent<InventoryWindow>().decrementNumberOfCraftedBombs();
             }
         }
         if (Input.GetKeyDown("3"))
@@ -234,6 +244,8 @@ public class BombWindow : MonoBehaviour {
                 isThirdFilled = false;
 
                 returnMaterials(2);
+
+                gameObject.GetComponent<InventoryWindow>().decrementNumberOfCraftedBombs();
             }
         }
     }
