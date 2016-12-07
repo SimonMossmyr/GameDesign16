@@ -67,15 +67,15 @@ public class BombWindow : NetworkBehaviour {
 
         // set the attributes here 
         // minimum radius is 0.3f though this may be too little
-        material1.setDamage(0.5f);
+        material1.setDamage(50);
         material1.setEffect(5);
         material1.setRange(0.3f);
 
-        materialtype2.setDamage(0.2f);
+        materialtype2.setDamage(20);
         materialtype2.setEffect(7);
         materialtype2.setRange(0.4f);
 
-        materialtype3.setDamage(0.4f);
+        materialtype3.setDamage(40);
         materialtype3.setEffect(13);
         materialtype3.setRange(0.5f);
 
