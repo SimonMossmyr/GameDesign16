@@ -583,7 +583,7 @@ MonoBehaviour:
   PlayerNumber: 0
   HealthPoints: 100
   actionDuration: 0.5
-  Lives: 0
+  Lives: 3
   PlayerBase: {fileID: 0}
   dieSound: {fileID: 8300000, guid: 8dc4ea59f1826a646a4f610c17441b0c, type: 3}
 --- !u!114 &114000013669075066

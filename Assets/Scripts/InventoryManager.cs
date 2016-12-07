@@ -29,7 +29,7 @@ public class InventoryManager : NetworkBehaviour {
         playerNumber = playerStat.PlayerNumber;
 
 		if (isLocalPlayer)
-			playerMaterialInventoryWindow = GameObject.Find("PlayerMaterialPanel");
+			playerMaterialInventoryWindow = GameObject.Find("Player0MaterialPanel");
     }
 	
 	// Update is called once per frame
