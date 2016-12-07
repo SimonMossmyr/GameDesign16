@@ -111,5 +111,12 @@ public class ExplodeCrossWithEffect : MonoBehaviour {
         }
         ps.startColor = explosionColor;
 
+        float hue;
+        float sat;
+        float val;
+        Color.RGBToHSV(explosionColor, out hue, out sat, out val);
+
+        ps.GetComponentInChildren<Light>().color = Color.HSVToRGB(hue, 0.95f, 0.95f);
+
     }
 }
