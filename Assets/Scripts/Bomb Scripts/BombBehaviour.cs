@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class BombBehaviour : MonoBehaviour {
+public class BombBehaviour : NetworkBehaviour {
 
+	[SyncVar]
     public float damage, effect, range;
     
 	// Use this for initialization

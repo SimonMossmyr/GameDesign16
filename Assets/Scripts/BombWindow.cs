@@ -182,14 +182,14 @@ public class BombWindow : NetworkBehaviour {
     }
 
 	[Command]
-    void CmdCreateStandardBomb(int slotID)
+	void CmdCreateStandardBomb(int slotID, float damage, float effect, float range)
     {
 
 		GameObject defaultBomb = (GameObject)Instantiate(bombStandart, transform.position, transform.rotation);
         defaultBombBeh = defaultBomb.GetComponent<BombBehaviour>();
-		defaultBombBeh.setDamage(bombSlotAttr[slotID, 0]);
-		defaultBombBeh.setEffect(bombSlotAttr[slotID, 1]);
-		defaultBombBeh.setRange(bombSlotAttr[slotID, 2]);
+		defaultBombBeh.setDamage(damage);
+		defaultBombBeh.setEffect(effect);
+		defaultBombBeh.setRange(range);
         
 		NetworkServer.Spawn (defaultBomb);
     }
@@ -210,7 +210,7 @@ public class BombWindow : NetworkBehaviour {
             if ( isFirstSlotFilled)
             {
                 // create an instance of the standart bomb and add the range, effect and damage attributes to it
-				CmdCreateStandardBomb(0);
+				CmdCreateStandardBomb(0, bombSlotAttr[0, 0], bombSlotAttr[0, 1], bombSlotAttr[0, 2]);
                 //set the sprite to empty 
                 slot1.sprite = emptySlotSprite;
                 //set the slot empty
@@ -225,7 +225,7 @@ public class BombWindow : NetworkBehaviour {
         {
             if (isSecondSlotFilled)
             {
-				CmdCreateStandardBomb(1);
+				CmdCreateStandardBomb(1, bombSlotAttr[1, 0], bombSlotAttr[1, 1], bombSlotAttr[1, 2]);
 
                 slot2.sprite = emptySlotSprite;
                 isSecondSlotFilled = false;
@@ -239,7 +239,8 @@ public class BombWindow : NetworkBehaviour {
         {
             if (isThirdFilled)
             {
-				CmdCreateStandardBomb(2);
+				CmdCreateStandardBomb(2, bombSlotAttr[2, 0], bombSlotAttr[2, 1], bombSlotAttr[2, 2]);
+
                 //drop the bomb
                 slot3.sprite = emptySlotSprite;
                 isThirdFilled = false;
