@@ -30,13 +30,23 @@ public class CustomNetworkManager : NetworkManager {
 		playerIndex = 0;
 	}
 
+	public override void OnStartClient(NetworkClient client) {
+		hud.showGUI = false;
+	}
+
+	public override void OnStartServer() {
+		hud.showGUI = false;
+	}
+
+	public override void OnStartHost() {
+		hud.showGUI = false;
+	}
+
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
 		GameObject SpawnPoint = GameObject.Find ("Player" + playerIndex + "Base");
 		var player = (GameObject)Instantiate(playerPrefab, SpawnPoint.transform.position, Quaternion.identity);
 		player.GetComponent<PlayerStats> ().PlayerNumber = playerIndex;
 		playerIndex++;
     	NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-
-		hud.showGUI = false;
 	}
 }
