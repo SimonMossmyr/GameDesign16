@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour {
@@ -17,14 +18,34 @@ public class PlayerStats : NetworkBehaviour {
 
     public AudioClip dieSound;
 
+    // the canvas that displays the health and the remaning lives of the player 
+    GameObject playerHealthDisplayCanvas;
+
 	// Use this for initialization
 	void Start () {
 		PlayerBase = GameObject.Find ("Player" + PlayerNumber + "Base");
+        if ( isLocalPlayer)
+            playerHealthDisplayCanvas = GameObject.Find("PlayerHealthDisplay");
 	}
 
 	// Update is called once per frame
 	void Update () {
+        if ( playerHealthDisplayCanvas)
+        {
+            Text [] playerHealthTexts = playerHealthDisplayCanvas.GetComponentsInChildren<Text>();
 
+            foreach (Text go in playerHealthTexts)
+            {
+                if (go.name == "PlayerHealthText")
+                {
+                    go.text = "" + HealthPoints;
+                }
+                else if ( go.name == "PlayerLifeText")
+                {
+                    go.text = "" + Lives;
+                }
+            }
+        }
 	}
 
 	public void AddHealth(float delta) {
