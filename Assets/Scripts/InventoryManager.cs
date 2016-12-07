@@ -26,7 +26,8 @@ public class InventoryManager : MonoBehaviour {
         material1Count = material2Count = material3Count = 0;
         playerStat = gameObject.GetComponent<PlayerStats>();
         playerNumber = playerStat.PlayerNumber;
-        playerMaterialInventoryWindow = GameObject.Find("Player" + playerNumber + "MaterialPanel");
+		playerMaterialInventoryWindow = GameObject.Find("PlayerMaterialPanel");
+		playerMaterialInventoryWindow.transform.position = GameObject.Find ("Player" + playerNumber + "InventoryPos").transform.position;
     }
 	
 	// Update is called once per frame
