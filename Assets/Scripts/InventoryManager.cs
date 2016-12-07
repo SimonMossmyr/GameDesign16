@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class InventoryManager : MonoBehaviour {
+public class InventoryManager : NetworkBehaviour {
 
     //inventory of the player
     private List<Material> itemsInInventory = new List<Material>();
@@ -26,13 +27,16 @@ public class InventoryManager : MonoBehaviour {
         material1Count = material2Count = material3Count = 0;
         playerStat = gameObject.GetComponent<PlayerStats>();
         playerNumber = playerStat.PlayerNumber;
-		playerMaterialInventoryWindow = GameObject.Find("PlayerMaterialPanel");
-		playerMaterialInventoryWindow.transform.position = GameObject.Find ("Player" + playerNumber + "InventoryPos").transform.position;
+
+		if (isLocalPlayer)
+			playerMaterialInventoryWindow = GameObject.Find("PlayerMaterialPanel");
     }
 	
 	// Update is called once per frame
 	void Update () {
-    
+		if (!isLocalPlayer)
+			return;
+
         // update the material texts 
         Text[] bombSlotCanvas = playerMaterialInventoryWindow.GetComponentsInChildren<Text>();
 
