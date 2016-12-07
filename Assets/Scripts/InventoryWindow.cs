@@ -169,6 +169,16 @@ public class InventoryWindow : NetworkBehaviour {
             slot1.sprite = emptySlotSprite;
             slot2.sprite = emptySlotSprite;
             slot3.sprite = emptySlotSprite;
+
+            isSlotOneFilled = false;
+            isSlotTwoFilled = false;
+            isSlotThreeFilled = false;
+
+            bombCombination = 0;
+
+            cratedMaterial1 = 0;
+            cratedMaterial2 = 0;
+            cratedMaterial3 = 0;
         }
     }
 
