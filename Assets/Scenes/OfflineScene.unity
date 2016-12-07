@@ -216,22 +216,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000014087879668, guid: 8aa7cdd1a3a8f4913bb1ef32d87276fd,
-        type: 2}
-      propertyPath: m_OfflineScene
-      value: OfflineScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000014087879668, guid: 8aa7cdd1a3a8f4913bb1ef32d87276fd,
-        type: 2}
-      propertyPath: m_OnlineScene
-      value: WorkScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000014087879668, guid: 8aa7cdd1a3a8f4913bb1ef32d87276fd,
-        type: 2}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 1000010467471280, guid: 7825c8be30972eb44a99bc092906b956,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8aa7cdd1a3a8f4913bb1ef32d87276fd, type: 2}
   m_IsPrefabParent: 0
