@@ -1,7 +1,7 @@
 # GameDesign16
 Repo for game design course DH2650. Made in Unity 5.4.2f2.
 
-## Play instructions
+## How to play
 1. Go to this repo's releases page and download the latest release
 2. Find out your IP-address
 3. Host a game
