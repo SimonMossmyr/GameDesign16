@@ -5,19 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/Offline.unity
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/MainScene.unity
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/WorkScene.unity
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/OfflineScene.unity
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/offline scene.unity
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/test scene.unity
   - enabled: 1
     path: Assets/Scenes/OfflineScene.unity
   - enabled: 1
-    path: Assets/Scenes/WorkScene.unity
+    path: Assets/Scenes/MainScene.unity
